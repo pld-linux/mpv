@@ -38,7 +38,8 @@ BuildRequires:	ncurses-devel
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel >= 19
 BuildRequires:	pulseaudio-devel >= 0.9
-BuildRequires:	waf
+# version dep to handle packaging issue in PLD
+BuildRequires:	waf >= 1.7.14
 BuildRequires:	wayland-devel >= 1.2.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXScrnSaver-devel
