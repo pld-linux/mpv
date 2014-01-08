@@ -18,6 +18,9 @@ BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladspa-devel
 BuildRequires:	lcms2-devel
 BuildRequires:	libass-devel
+%ifarch	i386 i486
+BuildRequires:	libatomic-devel
+%endif
 BuildRequires:	libcaca-devel >= 0.99
 BuildRequires:	libcdio-paranoia-devel
 BuildRequires:	libdvdnav-devel >= 4.2.0
