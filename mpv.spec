@@ -6,6 +6,7 @@ License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/%{name}/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
 # Source0-md5:	516f2eeec1d1f69905d11c1feec8166e
+Source1:	%{name}.conf
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libwayland-egl-devel >= 9.0.0
 BuildRequires:	OpenAL-devel >= 1.13
@@ -138,6 +139,9 @@ rm -rf $RPM_BUILD_ROOT
 
 waf install --destdir=$RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/mpv
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mpv
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -145,6 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_sysconfdir}/mpv
 %{_sysconfdir}/mpv/encoding-profiles.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mpv/mpv.conf
 %attr(755,root,root) %{_bindir}/%{name}
 %{_desktopdir}/mpv.desktop
 %{_iconsdir}/hicolor/*/apps/mpv.png
