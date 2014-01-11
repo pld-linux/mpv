@@ -1,10 +1,10 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
 Version:	0.3.2
-Release:	0.1
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
-Source0:	http://github.com/mpv-player/%{name}/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
+Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
 # Source0-md5:	516f2eeec1d1f69905d11c1feec8166e
 Source1:	%{name}.conf
 URL:		http://mpv.io/
@@ -14,7 +14,7 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	enca-devel
-BuildRequires:	ffmpeg-devel
+BuildRequires:	ffmpeg-devel >= 1.1.0
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladspa-devel
 BuildRequires:	lcms2-devel
@@ -22,12 +22,12 @@ BuildRequires:	libass-devel
 %ifarch	i386 i486
 BuildRequires:	libatomic-devel
 %endif
+BuildRequires:	libbluray-devel >= 0.2.1
+BuildRequires:	libbs2b-devel
 BuildRequires:	libcaca-devel >= 0.99
 BuildRequires:	libcdio-paranoia-devel
 BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
-BuildRequires:	libbluray-devel >= 0.2.1
-BuildRequires:	libbs2b-devel
 BuildRequires:	libguess-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmpg123-devel >= 1.2.0
@@ -60,7 +60,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
-movie player based on MPlayer and mplayer2.
+Movie player based on MPlayer and mplayer2.
 
 %prep
 %setup -q
@@ -130,8 +130,8 @@ waf configure \
 		--enable-xf86xk \
 		--enable-xinerama \
 		--enable-xss \
-		--enable-xv \
-	
+		--enable-xv
+
 waf build -v
 
 %install
