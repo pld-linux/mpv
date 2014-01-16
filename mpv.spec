@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.3.2
+Version:	0.3.3
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	516f2eeec1d1f69905d11c1feec8166e
+# Source0-md5:	bdf40570d1fc025058f9f2aabb91899f
 Source1:	%{name}.conf
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libwayland-egl-devel >= 9.0.0
