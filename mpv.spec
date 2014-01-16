@@ -1,7 +1,7 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
 Version:	0.3.3
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
@@ -42,6 +42,7 @@ BuildRequires:	ncurses-devel
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel >= 19
 BuildRequires:	pulseaudio-devel >= 0.9
+BuildRequires:	rpmbuild(macros) >= 1.336
 # version dep to handle packaging issue in PLD
 BuildRequires:	waf >= 1.7.14
 BuildRequires:	wayland-devel >= 1.2.0
@@ -66,10 +67,7 @@ Movie player based on MPlayer and mplayer2.
 %setup -q
 
 %build
-CC="%{__cc}"; export CC
-CFLAGS="%{rpmcflags}"; export CFLAGS
-LINKFLAGS="%{rpmldflags}"; export LINKFLAGS
-waf configure \
+%waf configure \
 		--prefix=%{_prefix} \
 		--bindir=%{_bindir} \
 		--confdir=%{_sysconfdir}/mpv \
@@ -132,12 +130,12 @@ waf configure \
 		--enable-xss \
 		--enable-xv
 
-waf build -v
+%waf build -v
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-waf install --destdir=$RPM_BUILD_ROOT
+%waf install --destdir=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/mpv
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mpv
