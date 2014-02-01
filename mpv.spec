@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.3.3
-Release:	2
+Version:	0.3.4
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	bdf40570d1fc025058f9f2aabb91899f
+# Source0-md5:	274bf45367df99774512cf43659004d5
 Source1:	%{name}.conf
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libwayland-egl-devel >= 9.0.0
@@ -45,7 +45,7 @@ BuildRequires:	pulseaudio-devel >= 0.9
 BuildRequires:	rpmbuild(macros) >= 1.336
 # version dep to handle packaging issue in PLD
 BuildRequires:	waf >= 1.7.14
-BuildRequires:	wayland-devel >= 1.2.0
+BuildRequires:	wayland-devel >= 1.3.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXScrnSaver-devel
 BuildRequires:	xorg-lib-libXdamage-devel
