@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.3.5
+Version:	0.3.6
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	b3fdd3e70d6e53a14c3b1881343d2aca
+# Source0-md5:	11a8bb5f10056b7cc0dbedd38fe6e581
 Source1:	%{name}.conf
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libwayland-egl-devel >= 9.0.0
@@ -30,7 +30,7 @@ BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
 BuildRequires:	libguess-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	libmpg123-devel >= 1.2.0
+BuildRequires:	libmpg123-devel >= 1.14.0
 BuildRequires:	libquvi-devel < 0.9.0
 BuildRequires:	libsmbclient-devel
 BuildRequires:	libv4l-devel
