@@ -1,12 +1,13 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.3.9
+Version:	0.4.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	afb42ae3b94bc968cfa9a690cde1df72
+# Source0-md5:	6b1ec7e8e3a2bcb5af68d62cea4577ba
 Source1:	%{name}.conf
+Patch0:		%{name}-zshcompdir.patch
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libwayland-egl-devel >= 9.0.0
 BuildRequires:	OpenAL-devel >= 1.13
@@ -14,10 +15,10 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	enca-devel
-BuildRequires:	ffmpeg-devel >= 1.1.0
+BuildRequires:	ffmpeg-devel >= 2.1.4
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladspa-devel
-BuildRequires:	lcms2-devel
+BuildRequires:	lcms2-devel >= 2.6
 BuildRequires:	libass-devel
 %ifarch	i386 i486
 BuildRequires:	libatomic-devel
@@ -60,11 +61,37 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
+%define		zshdir %{_datadir}/zsh/site-functions
+
 %description
 Movie player based on MPlayer and mplayer2.
 
+%package client-libs
+Summary:        Client library for controlling mpv
+Group:          Development/Libraries
+
+%description client-libs
+Client library for controlling mpv.
+
+%package client-devel
+Summary:        Development files for mpv client library
+Group:          Development/Libraries
+Requires:       %{name}-client-libs = %{version}-%{release}
+
+%description client-devel
+Development files for mpv client library.
+
+%package -n zsh-completion-mpv
+Summary:        zsh-completion for mpv
+Group:          Applications/Shells
+Requires:       %{name} = %{version}-%{release}
+
+%description -n zsh-completion-mpv
+zsh-completion for mpv.
+
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %waf configure \
@@ -84,6 +111,7 @@ Movie player based on MPlayer and mplayer2.
 		--enable-dvdnav \
 		--enable-dvdread \
 		--enable-enca \
+		--enable-encoding \
 		--enable-gl-wayland \
 		--enable-gl-x11 \
 		--enable-iconv \
@@ -93,9 +121,15 @@ Movie player based on MPlayer and mplayer2.
 		--enable-ladspa \
 		--enable-lcms2 \
 		--enable-libass \
+		--enable-libass-osd \
+		--enable-libavdevice \
+		--enable-libavfilter \
+		--enable-libavresample \
 		--enable-libbluray \
 		--enable-libbs2b \
 		--enable-libguess \
+		--enable-libmpv-shared \
+		--enable-libpostproc \
 		--enable-libquvi4 \
 		--enable-libsmbclient \
 		--enable-libv4l2 \
@@ -106,29 +140,27 @@ Movie player based on MPlayer and mplayer2.
 		--enable-portaudio \
 		--enable-pulse \
 		--enable-pvr \
-		--enable-radio \
-		--enable-radio-capture \
-		--enable-radio-v4l2 \
-		--enable-sdl \
+		--enable-sdl1 \
 		--enable-shm \
 		--enable-terminfo \
 		--enable-tv \
 		--enable-tv-v4l2 \
-		--enable-wayland \
 		--enable-vaapi \
 		--enable-vaapi-glx \
 		--enable-vaapi-hwaccel \
 		--enable-vaapi-vpp \
-		--enable-vcd \
 		--enable-vdpau \
+		--enable-vdpau-gl-x11 \
 		--enable-vdpau-hwaccel \
+		--enable-wayland \
 		--enable-x11 \
 		--enable-xext \
 		--enable-xf86vm \
 		--enable-xf86xk \
 		--enable-xinerama \
 		--enable-xss \
-		--enable-xv
+		--enable-xv \
+		--enable-zsh-comp
 
 %waf build -v
 
@@ -152,3 +184,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/mpv.desktop
 %{_iconsdir}/hicolor/*/apps/mpv.png
 %{_mandir}/man1/mpv.1*
+
+%files client-libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libmpv.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmpv.so.1
+
+%files client-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libmpv.so
+%{_includedir}/mpv
+%{_pkgconfigdir}/mpv.pc
+
+%files -n zsh-completion-mpv
+%defattr(644,root,root,755)
+%{zshdir}/_mpv
