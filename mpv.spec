@@ -1,13 +1,14 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
 Version:	0.4.1
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
 # Source0-md5:	24dcff8c676388227b280a463f9a05d0
 Source1:	%{name}.conf
 Patch0:		%{name}-zshcompdir.patch
+Patch1:		%{name}-lua.patch
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libwayland-egl-devel >= 9.0.0
 BuildRequires:	OpenAL-devel >= 1.13
@@ -39,6 +40,7 @@ BuildRequires:	libva-devel >= 1.2.0
 BuildRequires:	libva-glx-devel >= 1.2.0
 BuildRequires:	libvdpau-devel >= 0.2
 BuildRequires:	lirc-devel
+BuildRequires:	lua51-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel >= 19
@@ -92,6 +94,7 @@ zsh-completion for mpv.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %waf configure \
@@ -160,7 +163,8 @@ zsh-completion for mpv.
 		--enable-xinerama \
 		--enable-xss \
 		--enable-xv \
-		--enable-zsh-comp
+		--enable-zsh-comp \
+		--lua=51pld
 
 %waf build -v
 
