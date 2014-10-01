@@ -1,15 +1,14 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.5.4
+Version:	0.6.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	ab784201b48bc38aace349974da2b501
+# Source0-md5:	ac06561522ac1767cd05987ea85e827c
 Source1:	%{name}.conf
 Patch0:		%{name}-zshcompdir.patch
 Patch1:		%{name}-lua.patch
-Patch2:		%{name}-wafsyms.patch
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libwayland-egl-devel >= 9.0.0
 BuildRequires:	OpenAL-devel >= 1.13
@@ -96,7 +95,6 @@ zsh-completion for mpv.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 %waf configure \
@@ -160,8 +158,6 @@ zsh-completion for mpv.
 		--enable-wayland \
 		--enable-x11 \
 		--enable-xext \
-		--enable-xf86vm \
-		--enable-xf86xk \
 		--enable-xinerama \
 		--enable-xss \
 		--enable-xv \
