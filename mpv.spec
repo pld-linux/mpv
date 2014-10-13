@@ -1,14 +1,15 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.6.0
-Release:	2
+Version:	0.6.1
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	ac06561522ac1767cd05987ea85e827c
+# Source0-md5:	a6060358a47a5a7cfc1123b8f74dd5ab
 Source1:	%{name}.conf
 Patch0:		%{name}-zshcompdir.patch
 Patch1:		%{name}-lua.patch
+Patch2:		%{name}-xmonad_fullscreen.patch
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libwayland-egl-devel >= 9.0.0
 BuildRequires:	OpenAL-devel >= 1.13
@@ -95,6 +96,7 @@ zsh-completion for mpv.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %waf configure \
@@ -174,11 +176,14 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/mpv
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mpv
 
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc README.md RELEASE_NOTES etc/example.conf etc/input.conf etc/mplayer-input.conf etc/restore-old-bindings.conf
 %dir %{_sysconfdir}/mpv
 %{_sysconfdir}/mpv/encoding-profiles.conf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mpv/mpv.conf
