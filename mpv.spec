@@ -1,15 +1,13 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.6.2
+Version:	0.7.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	d0e25a26b6143b5e7d4ba354dd52f1b3
+# Source0-md5:	ddb900d0f4e086734ccf2a775a15c859
 Source1:	%{name}.conf
-Patch0:		%{name}-zshcompdir.patch
-Patch1:		%{name}-lua.patch
-Patch2:		%{name}-xmonad_fullscreen.patch
+Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libwayland-egl-devel >= 9.0.0
 BuildRequires:	OpenAL-devel >= 1.13
@@ -34,7 +32,6 @@ BuildRequires:	libdvdread-devel >= 4.1.0
 BuildRequires:	libguess-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmpg123-devel >= 1.14.0
-BuildRequires:	libquvi-devel < 0.9.0
 BuildRequires:	libsmbclient-devel
 BuildRequires:	libv4l-devel
 BuildRequires:	libva-devel >= 1.2.0
@@ -42,7 +39,6 @@ BuildRequires:	libva-glx-devel >= 1.2.0
 BuildRequires:	libvdpau-devel >= 0.2
 BuildRequires:	lirc-devel
 BuildRequires:	lua51-devel
-BuildRequires:	ncurses-devel
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel >= 19
 BuildRequires:	pulseaudio-devel >= 0.9
@@ -60,6 +56,7 @@ BuildRequires:	xorg-lib-libXxf86vm-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
 BuildRequires:	xorg-proto-xproto-devel
 Requires:	OpenGL
+Suggests:	youtube-dl >= 2:20141109
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
@@ -70,24 +67,24 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Movie player based on MPlayer and mplayer2.
 
 %package client-libs
-Summary:        Client library for controlling mpv
-Group:          Development/Libraries
+Summary:	Client library for controlling mpv
+Group:		Development/Libraries
 
 %description client-libs
 Client library for controlling mpv.
 
 %package client-devel
-Summary:        Development files for mpv client library
-Group:          Development/Libraries
-Requires:       %{name}-client-libs = %{version}-%{release}
+Summary:	Development files for mpv client library
+Group:		Development/Libraries
+Requires:	%{name}-client-libs = %{version}-%{release}
 
 %description client-devel
 Development files for mpv client library.
 
 %package -n zsh-completion-mpv
-Summary:        zsh-completion for mpv
-Group:          Applications/Shells
-Requires:       %{name} = %{version}-%{release}
+Summary:	zsh-completion for mpv
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
 
 %description -n zsh-completion-mpv
 zsh-completion for mpv.
@@ -95,8 +92,6 @@ zsh-completion for mpv.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 %waf configure \
@@ -135,7 +130,6 @@ zsh-completion for mpv.
 		--enable-libguess \
 		--enable-libmpv-shared \
 		--enable-libpostproc \
-		--enable-libquvi4 \
 		--enable-libsmbclient \
 		--enable-libv4l2 \
 		--enable-lirc \
@@ -147,7 +141,6 @@ zsh-completion for mpv.
 		--enable-pvr \
 		--enable-sdl1 \
 		--enable-shm \
-		--enable-terminfo \
 		--enable-tv \
 		--enable-tv-v4l2 \
 		--enable-vaapi \
@@ -164,7 +157,8 @@ zsh-completion for mpv.
 		--enable-xss \
 		--enable-xv \
 		--enable-zsh-comp \
-		--lua=51pld
+		--lua=51pld \
+		--zshdir=%{zshdir}
 
 %waf build -v
 
@@ -174,7 +168,7 @@ rm -rf $RPM_BUILD_ROOT
 %waf install --destdir=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/mpv
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mpv
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mpv
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}
 
