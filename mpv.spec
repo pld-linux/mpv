@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.7.1
+Version:	0.7.2
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	8112478d360135b2c78ea08dac3b9b22
+# Source0-md5:	5081934235bf1d531364f59e5f718024
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -55,7 +55,7 @@ BuildRequires:	xorg-lib-libXxf86vm-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
 BuildRequires:	xorg-proto-xproto-devel
 Requires:	OpenGL
-Suggests:	youtube-dl >= 2:20141109
+Suggests:	youtube-dl >= 2:20141126
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
