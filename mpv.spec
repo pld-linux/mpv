@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.7.3
+Version:	0.8.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	894e712235574fb78077e388f10c1cdd
+# Source0-md5:	b3d02a0db096e77ce38c3946dd631e58
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -40,7 +40,6 @@ BuildRequires:	libvdpau-devel >= 0.2
 BuildRequires:	lirc-devel
 BuildRequires:	lua51-devel
 BuildRequires:	pkgconfig
-BuildRequires:	portaudio-devel >= 19
 BuildRequires:	pulseaudio-devel >= 0.9
 BuildRequires:	rpmbuild(macros) >= 1.336
 BuildRequires:	waf >= 1.8.1
@@ -127,7 +126,6 @@ zsh-completion for mpv.
 		--enable-libbs2b \
 		--enable-libguess \
 		--enable-libmpv-shared \
-		--enable-libpostproc \
 		--enable-libsmbclient \
 		--enable-libswresample \
 		--enable-libv4l2 \
@@ -135,7 +133,6 @@ zsh-completion for mpv.
 		--enable-mpg123 \
 		--enable-openal \
 		--enable-oss-audio \
-		--enable-portaudio \
 		--enable-pulse \
 		--enable-pvr \
 		--enable-sdl1 \
