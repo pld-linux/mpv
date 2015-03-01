@@ -54,7 +54,7 @@ BuildRequires:	xorg-lib-libXxf86vm-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
 BuildRequires:	xorg-proto-xproto-devel
 Requires:	OpenGL
-Suggests:	youtube-dl >= 2:20141126
+Suggests:	youtube-dl >= 2:20150223
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
