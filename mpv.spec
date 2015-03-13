@@ -1,7 +1,7 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
 Version:	0.8.2
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
@@ -15,6 +15,7 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	enca-devel
+BuildRequires:	docutils
 BuildRequires:	ffmpeg-devel >= 2.1.4
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladspa-devel
