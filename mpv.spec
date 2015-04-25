@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.8.3
+Version:	0.9.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	a34ff41da1d5393ac8d6f9fbb743d3bd
+# Source0-md5:	df3cbee9dce0f97a5a3f901af9c64c2e
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -14,17 +14,17 @@ BuildRequires:	OpenAL-devel >= 1.13
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
-BuildRequires:	enca-devel
 BuildRequires:	docutils
-BuildRequires:	ffmpeg-devel >= 2.1.4
+BuildRequires:	enca-devel
+BuildRequires:	ffmpeg-devel >= 2.4.0
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladspa-devel
 BuildRequires:	lcms2-devel >= 2.6
-BuildRequires:	libass-devel
+BuildRequires:	libass-devel >= 0.12.1
 %ifarch	i386 i486
 BuildRequires:	libatomic-devel
 %endif
-BuildRequires:	libbluray-devel >= 0.2.1
+BuildRequires:	libbluray-devel >= 0.3.0
 BuildRequires:	libbs2b-devel
 BuildRequires:	libcaca-devel >= 0.99
 BuildRequires:	libcdio-paranoia-devel
@@ -32,18 +32,16 @@ BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
 BuildRequires:	libguess-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	libmpg123-devel >= 1.14.0
 BuildRequires:	libsmbclient-devel
 BuildRequires:	libv4l-devel
 BuildRequires:	libva-devel >= 1.2.0
 BuildRequires:	libva-glx-devel >= 1.2.0
 BuildRequires:	libvdpau-devel >= 0.2
-BuildRequires:	lirc-devel
 BuildRequires:	lua51-devel
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 0.9
 BuildRequires:	rpmbuild(macros) >= 1.336
-BuildRequires:	waf >= 1.8.1
+BuildRequires:	waf >= 1.8.4
 BuildRequires:	wayland-devel >= 1.3.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXScrnSaver-devel
@@ -54,7 +52,22 @@ BuildRequires:	xorg-lib-libXv-devel
 BuildRequires:	xorg-lib-libXxf86vm-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
 BuildRequires:	xorg-proto-xproto-devel
+Requires:	Mesa-libwayland-egl >= 9.0.0
+Requires:	OpenAL >= 1.13
 Requires:	OpenGL
+Requires:	ffmpeg-libs >= 2.4.0
+Requires:	lcms2 >= 2.6
+Requires:	libass >= 0.12.1
+Requires:	libbluray >= 0.3.0
+Requires:	libcaca >= 0.99
+Requires:	libdvdnav >= 4.2.0
+Requires:	libdvdread >= 4.1.0
+Requires:	libva >= 1.2.0
+Requires:	libva-glx >= 1.2.0
+Requires:	libvdpau >= 0.2
+Requires:	pulseaudio-libs >= 1.0
+Requires:	wayland >= 1.6.0
+Requires:	xorg-lib-libxkbcommon >= 0.3.0
 Suggests:	youtube-dl >= 2:20150223
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -115,7 +128,6 @@ zsh-completion for mpv.
 		--enable-gl-x11 \
 		--enable-iconv \
 		--enable-jack \
-		--enable-joystick \
 		--enable-jpeg \
 		--enable-ladspa \
 		--enable-lcms2 \
@@ -130,8 +142,6 @@ zsh-completion for mpv.
 		--enable-libsmbclient \
 		--enable-libswresample \
 		--enable-libv4l2 \
-		--enable-lirc \
-		--enable-mpg123 \
 		--enable-openal \
 		--enable-oss-audio \
 		--enable-pulse \
