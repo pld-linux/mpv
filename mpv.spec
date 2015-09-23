@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.10.0
+Version:	0.11.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	e81a975e4fa17f500dc2e7ea3d3ecf25
+# Source0-md5:	988bec97a4057beecc2f6a8a2c18e342
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -18,14 +18,12 @@ BuildRequires:	docutils
 BuildRequires:	enca-devel
 BuildRequires:	ffmpeg-devel >= 2.4.0
 BuildRequires:	jack-audio-connection-kit-devel
-BuildRequires:	ladspa-devel
 BuildRequires:	lcms2-devel >= 2.6
 BuildRequires:	libass-devel >= 0.12.1
 %ifarch	i386 i486
 BuildRequires:	libatomic-devel
 %endif
 BuildRequires:	libbluray-devel >= 0.3.0
-BuildRequires:	libbs2b-devel
 BuildRequires:	libcaca-devel >= 0.99
 BuildRequires:	libcdio-paranoia-devel
 BuildRequires:	libdvdnav-devel >= 4.2.0
@@ -129,14 +127,12 @@ zsh-completion for mpv.
 		--enable-iconv \
 		--enable-jack \
 		--enable-jpeg \
-		--enable-ladspa \
 		--enable-lcms2 \
 		--enable-libass \
 		--enable-libass-osd \
 		--enable-libavdevice \
 		--enable-libavfilter \
 		--enable-libbluray \
-		--enable-libbs2b \
 		--enable-libguess \
 		--enable-libmpv-shared \
 		--enable-libsmbclient \
