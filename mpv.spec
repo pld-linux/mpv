@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.11.0
+Version:	0.12.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	988bec97a4057beecc2f6a8a2c18e342
+# Source0-md5:	a3135f6227e28191cf620b3f2ea250d1
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -149,7 +149,6 @@ zsh-completion for mpv.
 		--enable-vaapi \
 		--enable-vaapi-glx \
 		--enable-vaapi-hwaccel \
-		--enable-vaapi-vpp \
 		--enable-vdpau \
 		--enable-vdpau-gl-x11 \
 		--enable-vdpau-hwaccel \
