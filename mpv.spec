@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.13.0
+Version:	0.14.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	553ff7a2d7f9c6a1e456ccdc0c352287
+# Source0-md5:	9f78599b52d9e603f2481d36746ddd0c
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -141,7 +141,6 @@ zsh-completion for mpv.
 		--enable-openal \
 		--enable-oss-audio \
 		--enable-pulse \
-		--enable-pvr \
 		--enable-sdl1 \
 		--enable-shm \
 		--enable-tv \
@@ -186,6 +185,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/%{name}
 %{_desktopdir}/mpv.desktop
 %{_iconsdir}/hicolor/*/apps/mpv.png
+%{_iconsdir}/hicolor/scalable/apps/mpv.svg
 %{_mandir}/man1/mpv.1*
 
 %files client-libs
