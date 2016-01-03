@@ -1,7 +1,7 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
 Version:	0.14.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
@@ -176,11 +176,14 @@ cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mpv
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	client-libs -p /sbin/ldconfig
+%postun	client-libs -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc README.md RELEASE_NOTES etc/example.conf etc/input.conf etc/mplayer-input.conf etc/restore-old-bindings.conf
 %dir %{_sysconfdir}/mpv
-%{_sysconfdir}/mpv/encoding-profiles.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mpv/encoding-profiles.conf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mpv/mpv.conf
 %attr(755,root,root) %{_bindir}/%{name}
 %{_desktopdir}/mpv.desktop
