@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.14.0
-Release:	2
+Version:	0.15.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	9f78599b52d9e603f2481d36746ddd0c
+# Source0-md5:	9042bd3fbff2bc8ba0b7fadaa4a22101
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -181,7 +181,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.md RELEASE_NOTES etc/example.conf etc/input.conf etc/mplayer-input.conf etc/restore-old-bindings.conf
+%doc README.md RELEASE_NOTES etc/input.conf etc/mplayer-input.conf etc/mpv.conf etc/restore-old-bindings.conf
 %dir %{_sysconfdir}/mpv
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mpv/encoding-profiles.conf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mpv/mpv.conf
