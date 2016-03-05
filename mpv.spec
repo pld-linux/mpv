@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.15.0
+Version:	0.16.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	9042bd3fbff2bc8ba0b7fadaa4a22101
+# Source0-md5:	e2a9e7d19d9e0e8861af141a67a9e4bd
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -131,7 +131,6 @@ zsh-completion for mpv.
 		--enable-libass \
 		--enable-libass-osd \
 		--enable-libavdevice \
-		--enable-libavfilter \
 		--enable-libbluray \
 		--enable-libguess \
 		--enable-libmpv-shared \
