@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.16.0
-Release:	2
+Version:	0.17.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	e2a9e7d19d9e0e8861af141a67a9e4bd
+# Source0-md5:	6253da021af1fcc8c1998a190ac593cc
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -188,6 +188,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/mpv.desktop
 %{_iconsdir}/hicolor/*/apps/mpv.png
 %{_iconsdir}/hicolor/scalable/apps/mpv.svg
+%{_iconsdir}/hicolor/symbolic/apps/mpv-symbolic.svg
 %{_mandir}/man1/mpv.1*
 
 %files client-libs
