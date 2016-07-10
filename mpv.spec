@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.18.0
+Version:	0.18.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	d5bdc0751c4d1b5f8eaa9cb4762d5514
+# Source0-md5:	708ef2f30825128b3eb9dd35a47ee7e4
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -53,7 +53,7 @@ BuildRequires:	xorg-proto-xproto-devel
 Requires:	Mesa-libwayland-egl >= 9.0.0
 Requires:	OpenAL >= 1.13
 Requires:	OpenGL
-Requires:	ffmpeg-libs >= 2.4.0
+%requires_eq	ffmpeg-libs
 Requires:	lcms2 >= 2.6
 Requires:	libass >= 0.12.1
 Requires:	libbluray >= 0.3.0
