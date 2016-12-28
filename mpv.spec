@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.22.0
+Version:	0.23.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	aa56677b11c1b634a83c56f1c1c39c57
+# Source0-md5:	9bce377e101612d611daf2a5c99aa95f
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -16,8 +16,7 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	docutils
-BuildRequires:	enca-devel
-BuildRequires:	ffmpeg-devel >= 2.4.0
+BuildRequires:	ffmpeg-devel >= 3.2
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	lcms2-devel >= 2.6
 BuildRequires:	libass-devel >= 0.12.1
@@ -29,7 +28,6 @@ BuildRequires:	libcaca-devel >= 0.99
 BuildRequires:	libcdio-paranoia-devel
 BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
-BuildRequires:	libguess-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsmbclient-devel
 BuildRequires:	libv4l-devel
@@ -40,6 +38,7 @@ BuildRequires:	lua51-devel
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 0.9
 BuildRequires:	rpmbuild(macros) >= 1.336
+BuildRequires:	uchardet-devel
 BuildRequires:	waf >= 1.8.12
 BuildRequires:	wayland-devel >= 1.3.0
 BuildRequires:	xorg-lib-libX11-devel
@@ -121,7 +120,6 @@ zsh-completion for mpv.
 		--enable-dvbin \
 		--enable-dvdnav \
 		--enable-dvdread \
-		--enable-enca \
 		--enable-encoding \
 		--enable-gl-wayland \
 		--enable-gl-x11 \
@@ -133,7 +131,6 @@ zsh-completion for mpv.
 		--enable-libass-osd \
 		--enable-libavdevice \
 		--enable-libbluray \
-		--enable-libguess \
 		--enable-libmpv-shared \
 		--enable-libsmbclient \
 		--enable-libswresample \
@@ -145,6 +142,7 @@ zsh-completion for mpv.
 		--enable-shm \
 		--enable-tv \
 		--enable-tv-v4l2 \
+		--enable-uchardet \
 		--enable-vaapi \
 		--enable-vaapi-glx \
 		--enable-vaapi-hwaccel \
