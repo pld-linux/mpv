@@ -116,6 +116,7 @@ zsh-completion for mpv.
 		--enable-audio-input \
 		--enable-caca \
 		--enable-cdda \
+		--enable-cplugins \
 		--enable-dvb \
 		--enable-dvbin \
 		--enable-dvdnav \
