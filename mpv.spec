@@ -1,11 +1,11 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
-Version:	0.24.0
-Release:	2
+Version:	0.25.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
-# Source0-md5:	5c85d1163911e49315a5bf1ca1fae13d
+# Source0-md5:	73b3d233c3b4428d0cfd5491c5cb6c41
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -16,7 +16,7 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	docutils
-BuildRequires:	ffmpeg-devel >= 3.2
+BuildRequires:	ffmpeg-devel >= 3.2.2
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	lcms2-devel >= 2.6
 BuildRequires:	libass-devel >= 0.12.1
@@ -41,11 +41,12 @@ BuildRequires:	rpmbuild(macros) >= 1.336
 BuildRequires:	uchardet-devel
 BuildRequires:	waf >= 1.8.12
 BuildRequires:	wayland-devel >= 1.3.0
-BuildRequires:	xorg-lib-libX11-devel
-BuildRequires:	xorg-lib-libXScrnSaver-devel
+BuildRequires:	xorg-lib-libX11-devel >= 1.0.0
+BuildRequires:	xorg-lib-libXScrnSaver-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXdamage-devel
-BuildRequires:	xorg-lib-libXext-devel
-BuildRequires:	xorg-lib-libXinerama-devel
+BuildRequires:	xorg-lib-libXext-devel >= 1.0.0
+BuildRequires:	xorg-lib-libXinerama-devel >= 1.0.0
+BuildRequires:	xorg-lib-libXrandr-devel >= 1.2.0
 BuildRequires:	xorg-lib-libXv-devel
 BuildRequires:	xorg-lib-libXxf86vm-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
@@ -65,6 +66,11 @@ Requires:	libva-glx >= 1.2.0
 Requires:	libvdpau >= 0.2
 Requires:	pulseaudio-libs >= 1.0
 Requires:	wayland >= 1.6.0
+Requires:	xorg-lib-libX11 >= 1.0.0
+Requires:	xorg-lib-libXScrnSaver >= 1.0.0
+Requires:	xorg-lib-libXext >= 1.0.0
+Requires:	xorg-lib-libXinerama >= 1.0.0
+Requires:	xorg-lib-libXrandr >= 1.2.0
 Requires:	xorg-lib-libxkbcommon >= 0.3.0
 Suggests:	youtube-dl >= 2:20150223
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -151,9 +157,6 @@ zsh-completion for mpv.
 		--enable-vdpau-hwaccel \
 		--enable-wayland \
 		--enable-x11 \
-		--enable-xext \
-		--enable-xinerama \
-		--enable-xss \
 		--enable-xv \
 		--enable-zsh-comp \
 		--lua=51pld \
