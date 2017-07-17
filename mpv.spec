@@ -1,7 +1,7 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Name:		mpv
 Version:	0.25.0
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		Applications/Multimedia
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
