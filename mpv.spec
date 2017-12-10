@@ -1,10 +1,12 @@
 Summary:	Movie player based on MPlayer and mplayer2
+Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
 Version:	0.27.0
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		Applications/Multimedia
-Source0:	http://github.com/mpv-player/mpv/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
+#Source0Download: http://github.com/mpv-player/mpv/releases
+Source0:	http://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	ec86f42b091d891f9a932de0f6e873ad
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
@@ -83,28 +85,43 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Movie player based on MPlayer and mplayer2.
 
+%description -l pl.UTF-8
+Odtwarzacz filmów oparty na projektach MPlayer i mplayer2.
+
 %package client-libs
 Summary:	Client library for controlling mpv
-Group:		Development/Libraries
+Summary(pl.UTF-8):	Biblioteka kliencka do sterowania odtwarzaczem mpv
+Group:		Libraries
 
 %description client-libs
 Client library for controlling mpv.
 
+%description client-libs -l pl.UTF-8
+Biblioteka kliencka do sterowania odtwarzaczem mpv.
+
 %package client-devel
 Summary:	Development files for mpv client library
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki klienckiej mpv
 Group:		Development/Libraries
 Requires:	%{name}-client-libs = %{version}-%{release}
 
 %description client-devel
 Development files for mpv client library.
 
+%description client-devel -l pl.UTF-8
+Pliki programistyczne biblioteki klienckiej mpv.
+
 %package -n zsh-completion-mpv
-Summary:	zsh-completion for mpv
+Summary:	ZSH completion for mpv
+Summary(pl.UTF-8):	Dopełnianie parametrów mpv dla powłoki ZSH
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 
 %description -n zsh-completion-mpv
-zsh-completion for mpv.
+ZSH completion for mpv.
+
+%description -n zsh-completion-mpv -l pl.UTF-8
+Dopełnianie parametrów mpv dla powłoki ZSH.
 
 %prep
 %setup -q
