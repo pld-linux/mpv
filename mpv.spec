@@ -1,13 +1,13 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.27.2
-Release:	4
+Version:	0.28.2
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	8cfb48e921e58c0d9d181d96d4809beb
+# Source0-md5:	b6538dec29a2a69574f4e3a3d688fb8b
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
@@ -18,7 +18,7 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel
 BuildRequires:	alsa-lib-devel >= 1.0.18
 BuildRequires:	docutils
-BuildRequires:	ffmpeg-devel >= 3.2.2
+BuildRequires:	ffmpeg-devel >= 4.0
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	lcms2-devel >= 2.6
 BuildRequires:	libass-devel >= 0.12.1
@@ -163,16 +163,13 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 		--enable-oss-audio \
 		--enable-pulse \
 		--enable-sdl1 \
-		--enable-shm \
 		--enable-tv \
 		--enable-tv-v4l2 \
 		--enable-uchardet \
 		--enable-vaapi \
 		--enable-vaapi-glx \
-		--enable-vaapi-hwaccel \
 		--enable-vdpau \
 		--enable-vdpau-gl-x11 \
-		--enable-vdpau-hwaccel \
 		--enable-wayland \
 		--enable-x11 \
 		--enable-xv \
