@@ -15,7 +15,7 @@ BuildRequires:	Mesa-libEGL-devel >= 9.0.0
 BuildRequires:	Mesa-libwayland-egl-devel >= 9.0.0
 BuildRequires:	OpenAL-devel >= 1.13
 BuildRequires:	OpenGL-devel
-BuildRequires:	SDL-devel
+BuildRequires:	SDL2-devel
 BuildRequires:	alsa-lib-devel >= 1.0.18
 BuildRequires:	docutils
 BuildRequires:	ffmpeg-devel >= 4.0
@@ -162,6 +162,7 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 		--enable-openal \
 		--enable-oss-audio \
 		--enable-pulse \
+		--enable-sdl2 \
 		--enable-tv \
 		--enable-tv-v4l2 \
 		--enable-uchardet \
