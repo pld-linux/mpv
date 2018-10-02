@@ -1,18 +1,17 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.29.0
-Release:	2
+Version:	0.29.1
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	5a4844da6f3683e27a99db7703721a64
+# Source0-md5:	2cd070c6aed980786177b7cb5b73664b
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libEGL-devel >= 9.0.0
-BuildRequires:	Mesa-libwayland-egl-devel >= 9.0.0
 BuildRequires:	OpenAL-devel >= 1.13
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL2-devel
@@ -43,6 +42,7 @@ BuildRequires:	rpmbuild(macros) >= 1.336
 BuildRequires:	uchardet-devel
 BuildRequires:	waf >= 1.8.12
 BuildRequires:	wayland-devel >= 1.6.0
+BuildRequires:	wayland-egl-devel
 BuildRequires:	wayland-protocols >= 1.14
 BuildRequires:	xorg-lib-libX11-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXScrnSaver-devel >= 1.0.0
@@ -54,7 +54,6 @@ BuildRequires:	xorg-lib-libXv-devel
 BuildRequires:	xorg-lib-libXxf86vm-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
 BuildRequires:	xorg-proto-xproto-devel
-Requires:	Mesa-libwayland-egl >= 9.0.0
 Requires:	OpenAL >= 1.13
 Requires:	OpenGL
 Requires:	alsa-lib >= 1.0.18
