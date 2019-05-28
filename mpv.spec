@@ -10,6 +10,7 @@ Source0:	http://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}
 # Source0-md5:	2cd070c6aed980786177b7cb5b73664b
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
+Patch1:		%{name}-shaderc.patch
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libEGL-devel >= 9.0.0
 BuildRequires:	OpenAL-devel >= 1.13
@@ -39,6 +40,7 @@ BuildRequires:	lua51-devel
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 1.0
 BuildRequires:	rpmbuild(macros) >= 1.336
+BuildRequires:	shaderc-devel
 BuildRequires:	uchardet-devel
 BuildRequires:	waf >= 1.8.12
 BuildRequires:	wayland-devel >= 1.6.0
@@ -126,6 +128,7 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %waf configure \
@@ -162,6 +165,7 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 		--enable-oss-audio \
 		--enable-pulse \
 		--enable-sdl2 \
+		--enable-shaderc \
 		--enable-tv \
 		--enable-tv-v4l2 \
 		--enable-uchardet \
