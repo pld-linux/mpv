@@ -1,13 +1,13 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.29.1
-Release:	13
+Version:	0.30.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	2cd070c6aed980786177b7cb5b73664b
+# Source0-md5:	254fdcd356561b30cb0ecb61b4873689
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 Patch1:		%{name}-shaderc.patch
@@ -40,7 +40,7 @@ BuildRequires:	lua51-devel
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 1.0
 BuildRequires:	rpmbuild(macros) >= 1.336
-BuildRequires:	shaderc-devel
+BuildRequires:	shaderc-devel >= 2019.0
 BuildRequires:	uchardet-devel
 BuildRequires:	waf >= 1.8.12
 BuildRequires:	wayland-devel >= 1.6.0
@@ -70,6 +70,7 @@ Requires:	libva >= 1.4.0
 Requires:	libva-glx >= 1.4.0
 Requires:	libvdpau >= 0.2
 Requires:	pulseaudio-libs >= 1.0
+Requires:	shaderc >= 2019.0
 Requires:	wayland >= 1.6.0
 Requires:	xorg-lib-libX11 >= 1.0.0
 Requires:	xorg-lib-libXScrnSaver >= 1.0.0
@@ -140,14 +141,12 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 		--mandir=%{_mandir} \
 		--disable-debug-build \
 		--enable-alsa \
-		--enable-audio-input \
 		--enable-caca \
 		--enable-cdda \
 		--enable-cplugins \
 		--enable-dvb \
 		--enable-dvbin \
 		--enable-dvdnav \
-		--enable-dvdread \
 		--enable-gl-wayland \
 		--enable-gl-x11 \
 		--enable-iconv \
@@ -160,23 +159,18 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 		--enable-libbluray \
 		--enable-libmpv-shared \
 		--enable-libsmbclient \
-		--enable-libv4l2 \
 		--enable-openal \
 		--enable-oss-audio \
 		--enable-pulse \
 		--enable-sdl2 \
 		--enable-shaderc \
-		--enable-tv \
-		--enable-tv-v4l2 \
 		--enable-uchardet \
 		--enable-vaapi \
-		--enable-vaapi-glx \
 		--enable-vdpau \
 		--enable-vdpau-gl-x11 \
 		--enable-wayland \
 		--enable-x11 \
 		--enable-xv \
-		--enable-zsh-comp \
 		--lua=51pld \
 		--zshdir=%{zshdir}
 
