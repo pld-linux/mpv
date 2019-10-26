@@ -31,6 +31,7 @@ BuildRequires:	libcdio-paranoia-devel
 BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
 BuildRequires:	libjpeg-devel
+BuildRequires:	libplacebo-devel >= 0.18.0
 BuildRequires:	libsmbclient-devel
 BuildRequires:	libva-devel >= 1.4.0
 BuildRequires:	libva-glx-devel >= 1.4.0
@@ -64,6 +65,7 @@ Requires:	libbluray >= 0.3.0
 Requires:	libcaca >= 0.99-0.beta18.1
 Requires:	libdvdnav >= 4.2.0
 Requires:	libdvdread >= 4.1.0
+Requires:	libplacebo >= 0.18.0
 Requires:	libva >= 1.4.0
 Requires:	libva-glx >= 1.4.0
 Requires:	libvdpau >= 0.2
@@ -156,6 +158,7 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 		--enable-libavdevice \
 		--enable-libbluray \
 		--enable-libmpv-shared \
+		--enable-libplacebo \
 		--enable-libsmbclient \
 		--enable-openal \
 		--enable-oss-audio \
