@@ -32,7 +32,6 @@ BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsmbclient-devel
-BuildRequires:	libv4l-devel
 BuildRequires:	libva-devel >= 1.4.0
 BuildRequires:	libva-glx-devel >= 1.4.0
 BuildRequires:	libvdpau-devel >= 0.2
@@ -43,7 +42,7 @@ BuildRequires:	rpmbuild(macros) >= 1.336
 BuildRequires:	shaderc-devel >= 2019.0
 BuildRequires:	uchardet-devel
 BuildRequires:	waf >= 1.8.12
-BuildRequires:	wayland-devel >= 1.6.0
+BuildRequires:	wayland-devel >= 1.15.0
 BuildRequires:	wayland-egl-devel
 BuildRequires:	wayland-protocols >= 1.14
 BuildRequires:	xorg-lib-libX11-devel >= 1.0.0
@@ -53,13 +52,12 @@ BuildRequires:	xorg-lib-libXext-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXinerama-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXrandr-devel >= 1.2.0
 BuildRequires:	xorg-lib-libXv-devel
-BuildRequires:	xorg-lib-libXxf86vm-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
 BuildRequires:	xorg-proto-xproto-devel
 Requires:	OpenAL >= 1.13
 Requires:	OpenGL
 Requires:	alsa-lib >= 1.0.18
-%requires_eq	ffmpeg-libs
+%requires_eq_to	ffmpeg-libs ffmpeg-devel
 Requires:	lcms2 >= 2.6
 Requires:	libass >= 0.12.1
 Requires:	libbluray >= 0.3.0
@@ -71,7 +69,7 @@ Requires:	libva-glx >= 1.4.0
 Requires:	libvdpau >= 0.2
 Requires:	pulseaudio-libs >= 1.0
 Requires:	shaderc >= 2019.0
-Requires:	wayland >= 1.6.0
+Requires:	wayland >= 1.15.0
 Requires:	xorg-lib-libX11 >= 1.0.0
 Requires:	xorg-lib-libXScrnSaver >= 1.0.0
 Requires:	xorg-lib-libXext >= 1.0.0
