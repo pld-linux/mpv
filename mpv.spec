@@ -1,18 +1,19 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.31.0
-Release:	3
+Version:	0.32.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	d383604619c77904ad190ad69876b7e4
+# Source0-md5:	1f7d23afe7a8639dedc9f7beef4e90d7
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 Patch1:		%{name}-shaderc.patch
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libEGL-devel >= 9.0.0
+BuildRequires:	Mesa-libgbm-devel
 BuildRequires:	OpenAL-devel >= 1.13
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL2-devel
@@ -21,6 +22,7 @@ BuildRequires:	docutils
 BuildRequires:	ffmpeg-devel >= 4.0
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	lcms2-devel >= 2.6
+BuildRequires:	libarchive-devel >= 3.4.0
 BuildRequires:	libass-devel >= 0.12.1
 %ifarch	i386 i486
 BuildRequires:	libatomic-devel
@@ -28,6 +30,7 @@ BuildRequires:	libatomic-devel
 BuildRequires:	libbluray-devel >= 0.3.0
 BuildRequires:	libcaca-devel >= 0.99-0.beta18.1
 BuildRequires:	libcdio-paranoia-devel
+BuildRequires:	libdrm-devel >= 2.4.74
 BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
 BuildRequires:	libjpeg-devel
@@ -37,11 +40,14 @@ BuildRequires:	libva-devel >= 1.4.0
 BuildRequires:	libva-glx-devel >= 1.4.0
 BuildRequires:	libvdpau-devel >= 0.2
 BuildRequires:	lua51-devel
+BuildRequires:	nv-codec-headers >= 8.2.15.7
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 1.0
-BuildRequires:	rpmbuild(macros) >= 1.336
+BuildRequires:	rpmbuild(macros) >= 1.719
+BuildRequires:	rubberband-devel >= 1.8.0
 BuildRequires:	shaderc-devel >= 2019.0
 BuildRequires:	uchardet-devel
+BuildRequires:	vapoursynth-devel >= 24
 BuildRequires:	waf >= 1.8.12
 BuildRequires:	wayland-devel >= 1.15.0
 BuildRequires:	wayland-egl-devel
@@ -55,14 +61,18 @@ BuildRequires:	xorg-lib-libXrandr-devel >= 1.2.0
 BuildRequires:	xorg-lib-libXv-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
 BuildRequires:	xorg-proto-xproto-devel
+BuildRequires:	zimg-devel >= 2.9
+BuildRequires:	zlib-devel
 Requires:	OpenAL >= 1.13
 Requires:	OpenGL
 Requires:	alsa-lib >= 1.0.18
 %requires_eq_to	ffmpeg-libs ffmpeg-devel
 Requires:	lcms2 >= 2.6
+Requires:	libarchive >= 3.4.0
 Requires:	libass >= 0.12.1
 Requires:	libbluray >= 0.3.0
 Requires:	libcaca >= 0.99-0.beta18.1
+Requires:	libdrm >= 2.4.74
 Requires:	libdvdnav >= 4.2.0
 Requires:	libdvdread >= 4.1.0
 Requires:	libplacebo >= 0.18.0
@@ -70,7 +80,9 @@ Requires:	libva >= 1.4.0
 Requires:	libva-glx >= 1.4.0
 Requires:	libvdpau >= 0.2
 Requires:	pulseaudio-libs >= 1.0
+Requires:	rubberband-libs >= 1.8.0
 Requires:	shaderc >= 2019.0
+Requires:	vapoursynth >= 24
 Requires:	wayland >= 1.15.0
 Requires:	xorg-lib-libX11 >= 1.0.0
 Requires:	xorg-lib-libXScrnSaver >= 1.0.0
@@ -78,12 +90,11 @@ Requires:	xorg-lib-libXext >= 1.0.0
 Requires:	xorg-lib-libXinerama >= 1.0.0
 Requires:	xorg-lib-libXrandr >= 1.2.0
 Requires:	xorg-lib-libxkbcommon >= 0.3.0
+Requires:	zimg >= 2.9
 Suggests:	youtube-dl >= 2:20150223
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
-
-%define		zshdir %{_datadir}/zsh/site-functions
 
 %description
 Movie player based on MPlayer and mplayer2.
@@ -113,6 +124,19 @@ Development files for mpv client library.
 
 %description client-devel -l pl.UTF-8
 Pliki programistyczne biblioteki klienckiej mpv.
+
+%package -n bash-completion-mpv
+Summary:	Bash completion for mpv
+Summary(pl.UTF-8):	Dopełnianie parametrów mpv dla powłoki Bash
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	bash-completion >= 2.0
+
+%description -n bash-completion-mpv
+Bash completion for mpv.
+
+%description -n bash-completion-mpv -l pl.UTF-8
+Dopełnianie parametrów mpv dla powłoki Bash.
 
 %package -n zsh-completion-mpv
 Summary:	ZSH completion for mpv
@@ -173,7 +197,8 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 		--enable-x11 \
 		--enable-xv \
 		--lua=51pld \
-		--zshdir=%{zshdir}
+		--bashdir=%{bash_compdir} \
+		--zshdir=%{zsh_compdir}
 
 %waf build -v
 
@@ -217,6 +242,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/mpv
 %{_pkgconfigdir}/mpv.pc
 
+%files -n bash-completion-mpv
+%defattr(644,root,root,755)
+%{bash_compdir}/mpv
+
 %files -n zsh-completion-mpv
 %defattr(644,root,root,755)
-%{zshdir}/_mpv
+%{zsh_compdir}/_mpv
