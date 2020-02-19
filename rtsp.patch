@@ -1,0 +1,13 @@
+--- mpv-0.32.0/demux/demux_lavf.c.org	2020-02-19 22:38:35.401192350 +0100
++++ mpv-0.32.0/demux/demux_lavf.c	2020-02-19 22:38:21.064094924 +0100
+@@ -1069,6 +1069,10 @@ static int demux_open_lavf(demuxer_t *de
+         demuxer->seekable = false;
+ #endif
+ 
++    if (matches_avinputformat_name(priv, "rtsp")
++            && priv->avfc->duration == AV_NOPTS_VALUE)
++        demuxer->seekable = false;
++
+     demuxer->is_network |= priv->format_hack.is_network;
+     demuxer->seekable &= !priv->format_hack.no_seek;
+ 

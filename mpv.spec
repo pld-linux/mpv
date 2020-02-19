@@ -2,7 +2,7 @@ Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
 Version:	0.32.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
@@ -11,6 +11,7 @@ Source0:	http://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}
 Source1:	%{name}.conf
 Patch0:		%{name}-lua.patch
 Patch1:		%{name}-shaderc.patch
+Patch2:		rtsp.patch
 URL:		http://mpv.io/
 BuildRequires:	Mesa-libEGL-devel >= 9.0.0
 BuildRequires:	Mesa-libgbm-devel
@@ -154,6 +155,7 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %waf configure \
