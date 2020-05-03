@@ -1,9 +1,20 @@
+#
+# Conditional build:
+%bcond_without	caca		# CACA
+%bcond_without	dvdnav		# dvdnav support
+%bcond_without	libplacebo	# libplacebo support
+%bcond_without	rubberband	# librubberband support
+%bcond_without	samba		# Samba support (makes mpv GPLv3)
+%bcond_without	shaderc		# libshaderc SPIR-V compiler
+%bcond_without	vapoursynth	# VapourSynth filter bridge
+%bcond_without	zimg		# libzimg support (high quality software scaler)
+
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
 Version:	0.32.0
 Release:	2
-License:	GPL v2+
+License:	GPL v%{!?with_samba:2}%{?with_samba:3}+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -29,14 +40,16 @@ BuildRequires:	libass-devel >= 0.12.1
 BuildRequires:	libatomic-devel
 %endif
 BuildRequires:	libbluray-devel >= 0.3.0
-BuildRequires:	libcaca-devel >= 0.99-0.beta18.1
+%{?with_caca:BuildRequires:	libcaca-devel >= 0.99-0.beta18.1}
 BuildRequires:	libcdio-paranoia-devel
 BuildRequires:	libdrm-devel >= 2.4.74
+%if %{with dvdnav}
 BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
+%endif
 BuildRequires:	libjpeg-devel
-BuildRequires:	libplacebo-devel >= 0.18.0
-BuildRequires:	libsmbclient-devel
+%{?with_libplacebo:BuildRequires:	libplacebo-devel >= 0.18.0}
+%{?with_samba:BuildRequires:	libsmbclient-devel}
 BuildRequires:	libva-devel >= 1.4.0
 BuildRequires:	libva-glx-devel >= 1.4.0
 BuildRequires:	libvdpau-devel >= 0.2
@@ -45,10 +58,10 @@ BuildRequires:	nv-codec-headers >= 8.2.15.7
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 1.0
 BuildRequires:	rpmbuild(macros) >= 1.719
-BuildRequires:	rubberband-devel >= 1.8.0
-BuildRequires:	shaderc-devel >= 2019.0
+%{?with_rubberband:BuildRequires:	rubberband-devel >= 1.8.0}
+%{?with_shaderc:BuildRequires:	shaderc-devel >= 2019.0}
 BuildRequires:	uchardet-devel
-BuildRequires:	vapoursynth-devel >= 24
+%{?with_vapoursynth:BuildRequires:	vapoursynth-devel >= 24}
 BuildRequires:	waf >= 1.8.12
 BuildRequires:	wayland-devel >= 1.15.0
 BuildRequires:	wayland-egl-devel
@@ -62,7 +75,7 @@ BuildRequires:	xorg-lib-libXrandr-devel >= 1.2.0
 BuildRequires:	xorg-lib-libXv-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
 BuildRequires:	xorg-proto-xproto-devel
-BuildRequires:	zimg-devel >= 2.9
+%{?with_zimg:BuildRequires:	zimg-devel >= 2.9}
 BuildRequires:	zlib-devel
 Requires:	OpenAL >= 1.13
 Requires:	OpenGL
@@ -72,18 +85,20 @@ Requires:	lcms2 >= 2.6
 Requires:	libarchive >= 3.4.0
 Requires:	libass >= 0.12.1
 Requires:	libbluray >= 0.3.0
-Requires:	libcaca >= 0.99-0.beta18.1
+%{?with_caca:Requires:	libcaca >= 0.99-0.beta18.1}
 Requires:	libdrm >= 2.4.74
+%if %{with dvdnav}
 Requires:	libdvdnav >= 4.2.0
 Requires:	libdvdread >= 4.1.0
-Requires:	libplacebo >= 0.18.0
+%endif
+%{?with_libplacebo:Requires:	libplacebo >= 0.18.0}
 Requires:	libva >= 1.4.0
 Requires:	libva-glx >= 1.4.0
 Requires:	libvdpau >= 0.2
 Requires:	pulseaudio-libs >= 1.0
-Requires:	rubberband-libs >= 1.8.0
-Requires:	shaderc >= 2019.0
-Requires:	vapoursynth >= 24
+%{?with_rubberband:Requires:	rubberband-libs >= 1.8.0}
+%{?with_shaderc:Requires:	shaderc >= 2019.0}
+%{?with_vapoursynth:Requires:	vapoursynth >= 24}
 Requires:	wayland >= 1.15.0
 Requires:	xorg-lib-libX11 >= 1.0.0
 Requires:	xorg-lib-libXScrnSaver >= 1.0.0
@@ -91,7 +106,7 @@ Requires:	xorg-lib-libXext >= 1.0.0
 Requires:	xorg-lib-libXinerama >= 1.0.0
 Requires:	xorg-lib-libXrandr >= 1.2.0
 Requires:	xorg-lib-libxkbcommon >= 0.3.0
-Requires:	zimg >= 2.9
+%{?with_zimg:Requires:	zimg >= 2.9}
 Suggests:	youtube-dl >= 2:20150223
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -167,12 +182,12 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 		--mandir=%{_mandir} \
 		--disable-debug-build \
 		--enable-alsa \
-		--enable-caca \
+		%{__enable_disable caca} \
 		--enable-cdda \
 		--enable-cplugins \
 		--enable-dvb \
 		--enable-dvbin \
-		--enable-dvdnav \
+		%{__enable_disable dvdnav} \
 		--enable-gl-wayland \
 		--enable-gl-x11 \
 		--enable-iconv \
@@ -184,20 +199,23 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 		--enable-libavdevice \
 		--enable-libbluray \
 		--enable-libmpv-shared \
-		--enable-libplacebo \
-		--enable-libsmbclient \
+		%{__enable_disable libplacebo} \
+		%{__enable_disable rubberband} \
+		%{__enable_disable samba libsmbclient} \
 		--enable-openal \
 		--enable-oss-audio \
 		--enable-pulse \
 		--enable-sdl2 \
-		--enable-shaderc \
+		%{__enable_disable shaderc} \
 		--enable-uchardet \
 		--enable-vaapi \
+		%{__enable_disable vapoursynth} \
 		--enable-vdpau \
 		--enable-vdpau-gl-x11 \
 		--enable-wayland \
 		--enable-x11 \
 		--enable-xv \
+		%{__enable_disable zimg} \
 		--lua=51pld \
 		--bashdir=%{bash_compdir} \
 		--zshdir=%{zsh_compdir}
