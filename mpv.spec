@@ -24,7 +24,7 @@ Patch0:		%{name}-lua.patch
 Patch1:		%{name}-shaderc.patch
 Patch2:		rtsp.patch
 URL:		http://mpv.io/
-BuildRequires:	Mesa-libEGL-devel >= 9.0.0
+BuildRequires:	EGL-devel
 BuildRequires:	Mesa-libgbm-devel
 BuildRequires:	OpenAL-devel >= 1.13
 BuildRequires:	OpenGL-devel
