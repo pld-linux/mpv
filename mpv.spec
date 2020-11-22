@@ -2,9 +2,9 @@
 # Conditional build:
 %bcond_without	caca		# CACA
 %bcond_without	dvdnav		# dvdnav support
+%bcond_without	js		# JavaScript scripting support
 %bcond_without	libplacebo	# libplacebo support
 %bcond_without	rubberband	# librubberband support
-%bcond_without	samba		# Samba support (makes mpv GPLv3)
 %bcond_without	shaderc		# libshaderc SPIR-V compiler
 %bcond_without	vapoursynth	# VapourSynth filter bridge
 %bcond_without	zimg		# libzimg support (high quality software scaler)
@@ -12,17 +12,15 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.32.0
-Release:	7
-License:	GPL v%{!?with_samba:2}%{?with_samba:3}+
+Version:	0.33.0
+Release:	1
+License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	http://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	1f7d23afe7a8639dedc9f7beef4e90d7
+# Source0-md5:	b08d25d3a44c3362984636e5dfa78ecc
 Source1:	%{name}.conf
-Patch0:		%{name}-lua.patch
-Patch1:		%{name}-shaderc.patch
-Patch2:		rtsp.patch
+Patch0:		%{name}-shaderc.patch
 URL:		http://mpv.io/
 BuildRequires:	EGL-devel
 BuildRequires:	Mesa-libgbm-devel
@@ -35,7 +33,7 @@ BuildRequires:	ffmpeg-devel >= 4.0
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	lcms2-devel >= 2.6
 BuildRequires:	libarchive-devel >= 3.4.0
-BuildRequires:	libass-devel >= 0.12.1
+BuildRequires:	libass-devel >= 0.12.2
 %ifarch	i386 i486
 BuildRequires:	libatomic-devel
 %endif
@@ -48,12 +46,12 @@ BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
 %endif
 BuildRequires:	libjpeg-devel
-%{?with_libplacebo:BuildRequires:	libplacebo-devel >= 0.18.0}
-%{?with_samba:BuildRequires:	libsmbclient-devel}
+%{?with_libplacebo:BuildRequires:	libplacebo-devel >= 1.18.0}
 BuildRequires:	libva-devel >= 1.4.0
 BuildRequires:	libva-glx-devel >= 1.4.0
 BuildRequires:	libvdpau-devel >= 0.2
-BuildRequires:	lua51-devel
+BuildRequires:	lua52-devel
+%{?with_js:BuildRequires:	mujs-devel >= 1.0.0}
 BuildRequires:	nv-codec-headers >= 8.2.15.7
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 1.0
@@ -62,7 +60,7 @@ BuildRequires:	rpmbuild(macros) >= 1.719
 %{?with_shaderc:BuildRequires:	shaderc-devel >= 2019.0}
 BuildRequires:	uchardet-devel
 %{?with_vapoursynth:BuildRequires:	vapoursynth-devel >= 24}
-BuildRequires:	waf >= 1.8.12
+BuildRequires:	waf >= 2.0.21
 BuildRequires:	wayland-devel >= 1.15.0
 BuildRequires:	wayland-egl-devel
 BuildRequires:	wayland-protocols >= 1.14
@@ -83,7 +81,7 @@ Requires:	alsa-lib >= 1.0.18
 %requires_eq_to	ffmpeg-libs ffmpeg-devel
 Requires:	lcms2 >= 2.6
 Requires:	libarchive >= 3.4.0
-Requires:	libass >= 0.12.1
+Requires:	libass >= 0.12.2
 Requires:	libbluray >= 0.3.0
 %{?with_caca:Requires:	libcaca >= 0.99-0.beta18.1}
 Requires:	libdrm >= 2.4.74
@@ -91,10 +89,11 @@ Requires:	libdrm >= 2.4.74
 Requires:	libdvdnav >= 4.2.0
 Requires:	libdvdread >= 4.1.0
 %endif
-%{?with_libplacebo:Requires:	libplacebo >= 0.18.0}
+%{?with_libplacebo:Requires:	libplacebo >= 1.18.0}
 Requires:	libva >= 1.4.0
 Requires:	libva-glx >= 1.4.0
 Requires:	libvdpau >= 0.2
+%{?with_js:Requires:	mujs >= 1.0.0}
 Requires:	pulseaudio-libs >= 1.0
 %{?with_rubberband:Requires:	rubberband-libs >= 1.8.0}
 %{?with_shaderc:Requires:	shaderc >= 2019.0}
@@ -169,8 +168,6 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 %waf configure \
@@ -192,18 +189,15 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 		--enable-gl-x11 \
 		--enable-iconv \
 		--enable-jack \
+		%{__enable_disable js javascript} \
 		--enable-jpeg \
 		--enable-lcms2 \
-		--enable-libass \
-		--enable-libass-osd \
 		--enable-libavdevice \
 		--enable-libbluray \
 		--enable-libmpv-shared \
 		%{__enable_disable libplacebo} \
 		%{__enable_disable rubberband} \
-		%{__enable_disable samba libsmbclient} \
 		--enable-openal \
-		--enable-oss-audio \
 		--enable-pulse \
 		--enable-sdl2 \
 		%{__enable_disable shaderc} \
@@ -216,7 +210,7 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 		--enable-x11 \
 		--enable-xv \
 		%{__enable_disable zimg} \
-		--lua=51pld \
+		--lua=52deb \
 		--bashdir=%{bash_compdir} \
 		--zshdir=%{zsh_compdir}
 
