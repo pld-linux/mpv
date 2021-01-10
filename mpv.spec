@@ -21,6 +21,7 @@ Source0:	http://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}
 # Source0-md5:	b08d25d3a44c3362984636e5dfa78ecc
 Source1:	%{name}.conf
 Patch0:		%{name}-shaderc.patch
+Patch1:		libplacebo.patch
 URL:		http://mpv.io/
 BuildRequires:	EGL-devel
 BuildRequires:	Mesa-libgbm-devel
@@ -168,6 +169,7 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %waf configure \
