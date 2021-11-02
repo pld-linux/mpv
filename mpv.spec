@@ -40,7 +40,7 @@ BuildRequires:	libatomic-devel
 BuildRequires:	libbluray-devel >= 0.3.0
 %{?with_caca:BuildRequires:	libcaca-devel >= 0.99-0.beta18.1}
 BuildRequires:	libcdio-paranoia-devel
-BuildRequires:	libdrm-devel >= 2.4.74
+BuildRequires:	libdrm-devel >= 2.4.75
 %if %{with dvdnav}
 BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
@@ -84,7 +84,7 @@ Requires:	libarchive >= 3.4.0
 Requires:	libass >= 0.12.2
 Requires:	libbluray >= 0.3.0
 %{?with_caca:Requires:	libcaca >= 0.99-0.beta18.1}
-Requires:	libdrm >= 2.4.74
+Requires:	libdrm >= 2.4.75
 %if %{with dvdnav}
 Requires:	libdvdnav >= 4.2.0
 Requires:	libdvdread >= 4.1.0
