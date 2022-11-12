@@ -12,18 +12,17 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.34.1
-Release:	4
+Version:	0.35.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	https://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	b5c76f9a7ce3a19a445869ffd9871d12
+# Source0-md5:	4db76c980d01bfcca6e8163671893652
 Source1:	%{name}.conf
-Patch0:		%{name}-shaderc.patch
 URL:		http://mpv.io/
 BuildRequires:	EGL-devel
-BuildRequires:	Mesa-libgbm-devel
+BuildRequires:	Mesa-libgbm-devel >= 17.1.0
 BuildRequires:	OpenAL-devel >= 1.13
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL2-devel
@@ -40,19 +39,20 @@ BuildRequires:	libatomic-devel
 BuildRequires:	libbluray-devel >= 0.3.0
 %{?with_caca:BuildRequires:	libcaca-devel >= 0.99-0.beta18.1}
 BuildRequires:	libcdio-paranoia-devel
-BuildRequires:	libdrm-devel >= 2.4.75
+BuildRequires:	libdrm-devel >= 2.4.105
 %if %{with dvdnav}
 BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
 %endif
 BuildRequires:	libjpeg-devel
-%{?with_libplacebo:BuildRequires:	libplacebo-devel >= 3.104.0}
+%{?with_libplacebo:BuildRequires:	libplacebo-devel >= 4.157.0}
 BuildRequires:	libva-devel >= 1.4.0
 BuildRequires:	libva-glx-devel >= 1.4.0
 BuildRequires:	libvdpau-devel >= 0.2
 BuildRequires:	lua52-devel
 %{?with_js:BuildRequires:	mujs-devel >= 1.0.0}
 BuildRequires:	nv-codec-headers >= 8.2.15.7
+BuildRequires:	pipewire-devel >= 0.3.19
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 1.0
 BuildRequires:	rpmbuild(macros) >= 2.007
@@ -63,12 +63,13 @@ BuildRequires:	uchardet-devel
 BuildRequires:	waf >= 2.0.21
 BuildRequires:	wayland-devel >= 1.15.0
 BuildRequires:	wayland-egl-devel
-BuildRequires:	wayland-protocols >= 1.14
+BuildRequires:	wayland-protocols >= 1.24
 BuildRequires:	xorg-lib-libX11-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXScrnSaver-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXdamage-devel
 BuildRequires:	xorg-lib-libXext-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXinerama-devel >= 1.0.0
+BuildRequires:	xorg-lib-libXpresent-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXrandr-devel >= 1.2.0
 BuildRequires:	xorg-lib-libXv-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
@@ -84,12 +85,13 @@ Requires:	libarchive >= 3.4.0
 Requires:	libass >= 0.12.2
 Requires:	libbluray >= 0.3.0
 %{?with_caca:Requires:	libcaca >= 0.99-0.beta18.1}
-Requires:	libdrm >= 2.4.75
+Requires:	libdrm >= 2.4.105
 %if %{with dvdnav}
 Requires:	libdvdnav >= 4.2.0
 Requires:	libdvdread >= 4.1.0
 %endif
-%{?with_libplacebo:Requires:	libplacebo >= 3.104.0}
+Requires:	pipewire-libs >= 0.3.19
+%{?with_libplacebo:Requires:	libplacebo >= 4.157.0}
 Requires:	libva >= 1.4.0
 Requires:	libva-glx >= 1.4.0
 Requires:	libvdpau >= 0.2
@@ -167,7 +169,6 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %waf configure \
@@ -244,11 +245,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/scalable/apps/mpv.svg
 %{_iconsdir}/hicolor/symbolic/apps/mpv-symbolic.svg
 %{_mandir}/man1/mpv.1*
+%{_datadir}/metainfo/mpv.metainfo.xml
 
 %files client-libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libmpv.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmpv.so.1
+%attr(755,root,root) %ghost %{_libdir}/libmpv.so.2
 
 %files client-devel
 %defattr(644,root,root,755)
