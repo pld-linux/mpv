@@ -147,7 +147,7 @@ Summary:	Bash completion for mpv
 Summary(pl.UTF-8):	Dopełnianie parametrów mpv dla powłoki Bash
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
-Requires:	bash-completion >= 2.0
+Requires:	bash-completion >= 1:2.0
 
 %description -n bash-completion-mpv
 Bash completion for mpv.
