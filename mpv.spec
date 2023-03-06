@@ -56,6 +56,7 @@ BuildRequires:	nv-codec-headers >= 8.2.15.7
 BuildRequires:	pipewire-devel >= 0.3.19
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 1.0
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.007
 %{?with_rubberband:BuildRequires:	rubberband-devel >= 1.8.0}
 %{?with_shaderc:BuildRequires:	shaderc-devel >= 2019.0}
@@ -149,6 +150,7 @@ Summary(pl.UTF-8):	Dopełnianie parametrów mpv dla powłoki Bash
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	bash-completion >= 1:2.0
+BuildArch:	noarch
 
 %description -n bash-completion-mpv
 Bash completion for mpv.
@@ -161,6 +163,7 @@ Summary:	ZSH completion for mpv
 Summary(pl.UTF-8):	Dopełnianie parametrów mpv dla powłoki ZSH
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
+BuildArch:	noarch
 
 %description -n zsh-completion-mpv
 ZSH completion for mpv.
