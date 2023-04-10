@@ -13,7 +13,7 @@ Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
 Version:	0.35.1
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
@@ -113,8 +113,6 @@ Requires:	xorg-lib-libxkbcommon >= 0.3.0
 Suggests:	yt-dlp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_noautoreqdep	libGL.so.1 libGLU.so.1
-
 %description
 Movie player based on MPlayer and mplayer2.
 
@@ -177,48 +175,48 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 
 %build
 %waf configure \
-		--prefix=%{_prefix} \
-		--bindir=%{_bindir} \
-		--confdir=%{_sysconfdir}/mpv \
-		--libdir=%{_libdir} \
-		--datadir=%{_datadir} \
-		--mandir=%{_mandir} \
-		--disable-debug-build \
-		--enable-alsa \
-		%{__enable_disable caca} \
-		--enable-cdda \
-		--enable-cplugins \
-		--enable-dvb \
-		--enable-dvbin \
-		%{__enable_disable dvdnav} \
-		--enable-gl-wayland \
-		--enable-gl-x11 \
-		--enable-iconv \
-		--enable-jack \
-		%{__enable_disable js javascript} \
-		--enable-jpeg \
-		--enable-lcms2 \
-		--enable-libavdevice \
-		--enable-libbluray \
-		--enable-libmpv-shared \
-		%{__enable_disable libplacebo} \
-		%{__enable_disable rubberband} \
-		--enable-openal \
-		--enable-pulse \
-		--enable-sdl2 \
-		%{__enable_disable shaderc} \
-		--enable-uchardet \
-		--enable-vaapi \
-		%{__enable_disable vapoursynth} \
-		--enable-vdpau \
-		--enable-vdpau-gl-x11 \
-		--enable-wayland \
-		--enable-x11 \
-		--enable-xv \
-		%{__enable_disable zimg} \
-		--lua=52deb \
-		--bashdir=%{bash_compdir} \
-		--zshdir=%{zsh_compdir}
+	--prefix=%{_prefix} \
+	--bindir=%{_bindir} \
+	--confdir=%{_sysconfdir}/mpv \
+	--libdir=%{_libdir} \
+	--datadir=%{_datadir} \
+	--mandir=%{_mandir} \
+	--disable-debug-build \
+	--enable-alsa \
+	%{__enable_disable caca} \
+	--enable-cdda \
+	--enable-cplugins \
+	--enable-dvb \
+	--enable-dvbin \
+	%{__enable_disable dvdnav} \
+	--enable-gl-wayland \
+	--enable-gl-x11 \
+	--enable-iconv \
+	--enable-jack \
+	%{__enable_disable js javascript} \
+	--enable-jpeg \
+	--enable-lcms2 \
+	--enable-libavdevice \
+	--enable-libbluray \
+	--enable-libmpv-shared \
+	%{__enable_disable libplacebo} \
+	%{__enable_disable rubberband} \
+	--enable-openal \
+	--enable-pulse \
+	--enable-sdl2 \
+	%{__enable_disable shaderc} \
+	--enable-uchardet \
+	--enable-vaapi \
+	%{__enable_disable vapoursynth} \
+	--enable-vdpau \
+	--enable-vdpau-gl-x11 \
+	--enable-wayland \
+	--enable-x11 \
+	--enable-xv \
+	%{__enable_disable zimg} \
+	--lua=52deb \
+	--bashdir=%{bash_compdir} \
+	--zshdir=%{zsh_compdir}
 
 %waf build -v
 
