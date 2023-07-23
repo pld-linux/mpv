@@ -78,9 +78,12 @@ BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
 BuildRequires:	xorg-proto-xproto-devel
 %{?with_zimg:BuildRequires:	zimg-devel >= 3.0.5}
 BuildRequires:	zlib-devel
+Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk-update-icon-cache
 Requires:	OpenAL >= 1.13
 Requires:	OpenGL
 Requires:	alsa-lib >= 1.0.18
+Requires:	hicolor-icon-theme
 %requires_eq_to	ffmpeg-libs ffmpeg-devel
 Requires:	lcms2 >= 2.6
 Requires:	libarchive >= 3.4.0
@@ -231,6 +234,14 @@ cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mpv
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%update_desktop_database_post
+%update_icon_cache hicolor
+
+%postun
+%update_desktop_database_postun
+%update_icon_cache hicolor
 
 %post	client-libs -p /sbin/ldconfig
 %postun	client-libs -p /sbin/ldconfig
