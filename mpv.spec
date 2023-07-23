@@ -12,24 +12,24 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.35.1
-Release:	4
+Version:	0.36.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	https://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	68460d9eb1b42bc6dc13713d4303049b
+# Source0-md5:	3ac8bb1fec1c09293a574e615446bb3b
 Source1:	%{name}.conf
-Patch0:		ytdl.patch
 URL:		http://mpv.io/
 BuildRequires:	EGL-devel
 BuildRequires:	Mesa-libgbm-devel >= 17.1.0
 BuildRequires:	OpenAL-devel >= 1.13
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL2-devel
+BuildRequires:	Vulkan-Loader-devel >= 1.3.238
 BuildRequires:	alsa-lib-devel >= 1.0.18
 BuildRequires:	docutils
-BuildRequires:	ffmpeg-devel >= 4.0
+BuildRequires:	ffmpeg-devel >= 4.4
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	lcms2-devel >= 2.6
 BuildRequires:	libarchive-devel >= 3.4.0
@@ -52,7 +52,7 @@ BuildRequires:	libva-glx-devel >= 1.4.0
 BuildRequires:	libvdpau-devel >= 0.2
 BuildRequires:	lua52-devel
 %{?with_js:BuildRequires:	mujs-devel >= 1.0.0}
-BuildRequires:	nv-codec-headers >= 8.2.15.7
+BuildRequires:	nv-codec-headers >= 11.1.5.1
 BuildRequires:	pipewire-devel >= 0.3.19
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 1.0
@@ -63,9 +63,9 @@ BuildRequires:	rpmbuild(macros) >= 2.007
 BuildRequires:	uchardet-devel
 %{?with_vapoursynth:BuildRequires:	vapoursynth-devel >= 24}
 BuildRequires:	waf >= 2.0.21
-BuildRequires:	wayland-devel >= 1.15.0
+BuildRequires:	wayland-devel >= 1.20.0
 BuildRequires:	wayland-egl-devel
-BuildRequires:	wayland-protocols >= 1.24
+BuildRequires:	wayland-protocols >= 1.32
 BuildRequires:	xorg-lib-libX11-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXScrnSaver-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXdamage-devel
@@ -76,7 +76,7 @@ BuildRequires:	xorg-lib-libXrandr-devel >= 1.2.0
 BuildRequires:	xorg-lib-libXv-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.3.0
 BuildRequires:	xorg-proto-xproto-devel
-%{?with_zimg:BuildRequires:	zimg-devel >= 2.9}
+%{?with_zimg:BuildRequires:	zimg-devel >= 3.0.5}
 BuildRequires:	zlib-devel
 Requires:	OpenAL >= 1.13
 Requires:	OpenGL
@@ -93,7 +93,7 @@ Requires:	libdvdnav >= 4.2.0
 Requires:	libdvdread >= 4.1.0
 %endif
 Requires:	pipewire-libs >= 0.3.19
-%{?with_libplacebo:Requires:	libplacebo >= 4.157.0}
+%{?with_libplacebo:%requires_ge_to	libplacebo libplacebo-devel}
 Requires:	libva >= 1.4.0
 Requires:	libva-glx >= 1.4.0
 Requires:	libvdpau >= 0.2
@@ -109,7 +109,7 @@ Requires:	xorg-lib-libXext >= 1.0.0
 Requires:	xorg-lib-libXinerama >= 1.0.0
 Requires:	xorg-lib-libXrandr >= 1.2.0
 Requires:	xorg-lib-libxkbcommon >= 0.3.0
-%{?with_zimg:Requires:	zimg >= 2.9}
+%{?with_zimg:Requires:	zimg >= 3.0.5}
 Suggests:	yt-dlp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -171,7 +171,6 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %waf configure \
