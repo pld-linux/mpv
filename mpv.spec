@@ -53,7 +53,7 @@ BuildRequires:	libvdpau-devel >= 0.2
 BuildRequires:	lua52-devel
 %{?with_js:BuildRequires:	mujs-devel >= 1.0.0}
 BuildRequires:	nv-codec-headers >= 11.1.5.1
-BuildRequires:	pipewire-devel >= 0.3.19
+BuildRequires:	pipewire-devel >= 0.3.48
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 1.0
 BuildRequires:	rpm-build >= 4.6
@@ -95,7 +95,7 @@ Requires:	libdrm >= 2.4.105
 Requires:	libdvdnav >= 4.2.0
 Requires:	libdvdread >= 4.1.0
 %endif
-Requires:	pipewire-libs >= 0.3.19
+Requires:	pipewire-libs >= 0.3.48
 %{?with_libplacebo:%requires_ge_to	libplacebo libplacebo-devel}
 Requires:	libva >= 1.4.0
 Requires:	libva-glx >= 1.4.0
