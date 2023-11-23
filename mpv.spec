@@ -33,7 +33,7 @@ BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	lcms2-devel >= 2.6
 BuildRequires:	libarchive-devel >= 3.4.0
 BuildRequires:	libass-devel >= 0.12.2
-%ifarch	i386 i486 %{armv6}
+%ifnarch %arch_with_atomics64
 BuildRequires:	libatomic-devel
 %endif
 BuildRequires:	libbluray-devel >= 0.3.0
@@ -59,7 +59,7 @@ BuildRequires:	pipewire-devel >= 0.3.48
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 1.0
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 2.007
+BuildRequires:	rpmbuild(macros) >= 2.025
 %{?with_rubberband:BuildRequires:	rubberband-devel >= 1.8.0}
 %{?with_shaderc:BuildRequires:	shaderc-devel >= 2019.0}
 BuildRequires:	uchardet-devel
