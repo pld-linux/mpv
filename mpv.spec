@@ -4,7 +4,6 @@
 %bcond_without	dvdnav		# dvdnav support
 %bcond_without	js		# JavaScript scripting support
 %bcond_without	rubberband	# librubberband support
-%bcond_without	shaderc		# libshaderc SPIR-V compiler
 %bcond_without	sixel		# sixel video output
 %bcond_without	vapoursynth	# VapourSynth filter bridge
 %bcond_without	zimg		# libzimg support (high quality software scaler)
@@ -12,13 +11,13 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.37.0
-Release:	3
+Version:	0.38.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	https://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	54bd6864cc831f1fee6dee693a0421eb
+# Source0-md5:	7c1a400867e8930f037efc86c1f90a14
 Source1:	%{name}.conf
 URL:		http://mpv.io/
 BuildRequires:	EGL-devel
@@ -47,7 +46,7 @@ BuildRequires:	libdvdnav-devel >= 4.2.0
 BuildRequires:	libdvdread-devel >= 4.1.0
 %endif
 BuildRequires:	libjpeg-devel
-BuildRequires:	libplacebo-devel >= 6.338.0
+BuildRequires:	libplacebo-devel >= 6.338.2
 %{?with_sixel:BuildRequires:	libsixel-devel >= 1.5}
 BuildRequires:	libva-devel >= 1.4.0
 BuildRequires:	libva-glx-devel >= 1.4.0
@@ -63,7 +62,6 @@ BuildRequires:	pulseaudio-devel >= 1.0
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.025
 %{?with_rubberband:BuildRequires:	rubberband-devel >= 1.8.0}
-%{?with_shaderc:BuildRequires:	shaderc-devel >= 2019.0}
 BuildRequires:	uchardet-devel
 %{?with_vapoursynth:BuildRequires:	vapoursynth-devel >= 26}
 BuildRequires:	wayland-devel >= 1.20.0
@@ -106,7 +104,6 @@ Requires:	libvdpau >= 0.2
 %{?with_js:Requires:	mujs >= 1.0.0}
 Requires:	pulseaudio-libs >= 1.0
 %{?with_rubberband:Requires:	rubberband-libs >= 1.8.0}
-%{?with_shaderc:Requires:	shaderc >= 2019.0}
 %{?with_vapoursynth:Requires:	vapoursynth >= 26}
 Requires:	wayland >= 1.15.0
 Requires:	xorg-lib-libX11 >= 1.0.0
@@ -200,7 +197,6 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 	-Dopenal=enabled \
 	-Dpulse=enabled \
 	-Dsdl2=enabled \
-	-Dshaderc=%{__enabled_disabled shaderc} \
 	-Dsixel=%{__enabled_disabled sixel} \
 	-Duchardet=enabled \
 	-Dvaapi=enabled \
