@@ -5,6 +5,7 @@
 %bcond_without	js		# JavaScript scripting support
 %bcond_without	rubberband	# librubberband support
 %bcond_without	shaderc		# libshaderc SPIR-V compiler
+%bcond_without	sixel		# sixel video output
 %bcond_without	vapoursynth	# VapourSynth filter bridge
 %bcond_without	zimg		# libzimg support (high quality software scaler)
 
@@ -47,6 +48,7 @@ BuildRequires:	libdvdread-devel >= 4.1.0
 %endif
 BuildRequires:	libjpeg-devel
 BuildRequires:	libplacebo-devel >= 6.338.0
+%{?with_sixel:BuildRequires:	libsixel-devel >= 1.5}
 BuildRequires:	libva-devel >= 1.4.0
 BuildRequires:	libva-glx-devel >= 1.4.0
 BuildRequires:	libvdpau-devel >= 0.2
@@ -97,6 +99,7 @@ Requires:	libdvdread >= 4.1.0
 %endif
 Requires:	pipewire-libs >= 0.3.48
 %requires_ge_to	libplacebo libplacebo-devel
+%{?with_sixel:Requires:	libsixel >= 1.5}
 Requires:	libva >= 1.4.0
 Requires:	libva-glx >= 1.4.0
 Requires:	libvdpau >= 0.2
@@ -198,6 +201,7 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 	-Dpulse=enabled \
 	-Dsdl2=enabled \
 	-Dshaderc=%{__enabled_disabled shaderc} \
+	-Dsixel=%{__enabled_disabled sixel} \
 	-Duchardet=enabled \
 	-Dvaapi=enabled \
 	-Dvapoursynth=%{__enabled_disabled vapoursynth} \
