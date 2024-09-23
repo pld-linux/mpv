@@ -11,13 +11,13 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.38.0
-Release:	2
+Version:	0.39.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	https://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	7c1a400867e8930f037efc86c1f90a14
+# Source0-md5:	a004bb1532bdaba8f19a488a27f41253
 Source1:	%{name}.conf
 URL:		http://mpv.io/
 BuildRequires:	EGL-devel
@@ -28,7 +28,7 @@ BuildRequires:	SDL2-devel
 BuildRequires:	Vulkan-Loader-devel >= 1.3.238
 BuildRequires:	alsa-lib-devel >= 1.0.18
 BuildRequires:	docutils
-BuildRequires:	ffmpeg-devel >= 4.4
+BuildRequires:	ffmpeg-devel >= 6.1
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	lcms2-devel >= 2.6
 BuildRequires:	libarchive-devel >= 3.4.0
@@ -63,8 +63,8 @@ BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.025
 %{?with_rubberband:BuildRequires:	rubberband-devel >= 1.8.0}
 BuildRequires:	uchardet-devel
-%{?with_vapoursynth:BuildRequires:	vapoursynth-devel >= 26}
-BuildRequires:	wayland-devel >= 1.20.0
+%{?with_vapoursynth:BuildRequires:	vapoursynth-devel >= 56}
+BuildRequires:	wayland-devel >= 1.21.0
 BuildRequires:	wayland-egl-devel
 BuildRequires:	wayland-protocols >= 1.32
 BuildRequires:	xorg-lib-libX11-devel >= 1.0.0
@@ -104,8 +104,8 @@ Requires:	libvdpau >= 0.2
 %{?with_js:Requires:	mujs >= 1.0.0}
 Requires:	pulseaudio-libs >= 1.0
 %{?with_rubberband:Requires:	rubberband-libs >= 1.8.0}
-%{?with_vapoursynth:Requires:	vapoursynth >= 26}
-Requires:	wayland >= 1.15.0
+%{?with_vapoursynth:Requires:	vapoursynth >= 56}
+Requires:	wayland >= 1.21.0
 Requires:	xorg-lib-libX11 >= 1.0.0
 Requires:	xorg-lib-libXScrnSaver >= 1.0.0
 Requires:	xorg-lib-libXext >= 1.0.0
