@@ -11,13 +11,13 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.39.0
+Version:	0.40.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	https://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	a004bb1532bdaba8f19a488a27f41253
+# Source0-md5:	1c1823dedca2cf4cd0a44c94637fa31b
 Source1:	%{name}.conf
 URL:		http://mpv.io/
 BuildRequires:	EGL-devel
@@ -40,10 +40,10 @@ BuildRequires:	libbluray-devel >= 0.3.0
 %{?with_caca:BuildRequires:	libcaca-devel >= 0.99-0.beta18.1}
 BuildRequires:	libcdio-devel >= 0.90
 BuildRequires:	libcdio-paranoia-devel
+BuildRequires:	libdisplay-info-devel >= 0.1.1
 BuildRequires:	libdrm-devel >= 2.4.105
 %if %{with dvdnav}
 BuildRequires:	libdvdnav-devel >= 4.2.0
-BuildRequires:	libdvdread-devel >= 4.1.0
 %endif
 BuildRequires:	libjpeg-devel
 BuildRequires:	libplacebo-devel >= 6.338.2
@@ -52,7 +52,7 @@ BuildRequires:	libva-devel >= 1.4.0
 BuildRequires:	libva-glx-devel >= 1.4.0
 BuildRequires:	libvdpau-devel >= 0.2
 BuildRequires:	lua52-devel
-BuildRequires:	meson >= 0.62.0
+BuildRequires:	meson >= 1.3.0
 %{?with_js:BuildRequires:	mujs-devel >= 1.0.0}
 BuildRequires:	ninja
 BuildRequires:	nv-codec-headers >= 11.1.5.1
@@ -66,7 +66,7 @@ BuildRequires:	uchardet-devel
 %{?with_vapoursynth:BuildRequires:	vapoursynth-devel >= 56}
 BuildRequires:	wayland-devel >= 1.21.0
 BuildRequires:	wayland-egl-devel
-BuildRequires:	wayland-protocols >= 1.32
+BuildRequires:	wayland-protocols >= 1.41
 BuildRequires:	xorg-lib-libX11-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXScrnSaver-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXdamage-devel
@@ -90,10 +90,10 @@ Requires:	libarchive >= 3.4.0
 Requires:	libass >= 0.12.2
 Requires:	libbluray >= 0.3.0
 %{?with_caca:Requires:	libcaca >= 0.99-0.beta18.1}
+Requires:	libdisplay-info >= 0.1.1
 Requires:	libdrm >= 2.4.105
 %if %{with dvdnav}
 Requires:	libdvdnav >= 4.2.0
-Requires:	libdvdread >= 4.1.0
 %endif
 Requires:	pipewire-libs >= 0.3.48
 %requires_ge_to	libplacebo libplacebo-devel
@@ -157,6 +157,20 @@ Bash completion for mpv.
 
 %description -n bash-completion-mpv -l pl.UTF-8
 Dopełnianie parametrów mpv dla powłoki Bash.
+
+%package -n fish-completion-mpv
+Summary:	Fish completion for mpv
+Summary(pl.UTF-8):	Dopełnianie parametrów mpv dla powłoki Fish
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	fish
+BuildArch:	noarch
+
+%description -n fish-completion-mpv
+Fish completion for mpv.
+
+%description -n fish-completion-mpv -l pl.UTF-8
+Dopełnianie parametrów mpv dla powłoki Fish.
 
 %package -n zsh-completion-mpv
 Summary:	ZSH completion for mpv
@@ -263,6 +277,10 @@ rm -rf $RPM_BUILD_ROOT
 %files -n bash-completion-mpv
 %defattr(644,root,root,755)
 %{bash_compdir}/mpv
+
+%files -n fish-completion-mpv
+%defattr(644,root,root,755)
+%{fish_compdir}/mpv.fish
 
 %files -n zsh-completion-mpv
 %defattr(644,root,root,755)
