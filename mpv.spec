@@ -60,7 +60,7 @@ BuildRequires:	pipewire-devel >= 0.3.48
 BuildRequires:	pkgconfig
 BuildRequires:	pulseaudio-devel >= 1.0
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 2.025
+BuildRequires:	rpmbuild(macros) >= 2.042
 %{?with_rubberband:BuildRequires:	rubberband-devel >= 1.8.0}
 BuildRequires:	uchardet-devel
 %{?with_vapoursynth:BuildRequires:	vapoursynth-devel >= 56}
@@ -175,7 +175,7 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 %setup -q
 
 %build
-%meson build \
+%meson \
 	-Dalsa=enabled \
 	-Dcaca=%{__enabled_disabled caca} \
 	-Dcdda=enabled \
@@ -209,12 +209,12 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 	-Dzimg=%{__enabled_disabled zimg} \
 	-Dlua=lua5.2
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/mpv
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mpv
