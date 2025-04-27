@@ -12,7 +12,7 @@ Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
 Version:	0.40.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
@@ -233,6 +233,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/mpv
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/mpv
 
+cp -p TOOLS/mpv_identify.sh $RPM_BUILD_ROOT%{_bindir}
+
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}
 
 %clean
@@ -256,6 +258,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mpv/encoding-profiles.conf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mpv/mpv.conf
 %attr(755,root,root) %{_bindir}/%{name}
+%attr(755,root,root) %{_bindir}/mpv_identify.sh
 %{_desktopdir}/mpv.desktop
 %{_iconsdir}/hicolor/*/apps/mpv.png
 %{_iconsdir}/hicolor/scalable/apps/mpv.svg
