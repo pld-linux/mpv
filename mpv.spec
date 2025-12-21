@@ -11,13 +11,13 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.40.0
-Release:	5
+Version:	0.41.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	https://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	1c1823dedca2cf4cd0a44c94637fa31b
+# Source0-md5:	fa40a0fedeaf0a77127e238a39b9d4c4
 Source1:	%{name}.conf
 URL:		http://mpv.io/
 BuildRequires:	EGL-devel
@@ -36,7 +36,7 @@ BuildRequires:	libass-devel >= 0.12.2
 %ifnarch %arch_with_atomics64
 BuildRequires:	libatomic-devel
 %endif
-BuildRequires:	libbluray-devel >= 0.3.0
+BuildRequires:	libbluray-devel >= 0.5.0
 %{?with_caca:BuildRequires:	libcaca-devel >= 0.99-0.beta18.1}
 BuildRequires:	libcdio-devel >= 0.90
 BuildRequires:	libcdio-paranoia-devel
@@ -66,11 +66,12 @@ BuildRequires:	uchardet-devel
 %{?with_vapoursynth:BuildRequires:	vapoursynth-devel >= 56}
 BuildRequires:	wayland-devel >= 1.21.0
 BuildRequires:	wayland-egl-devel
-BuildRequires:	wayland-protocols >= 1.41
+BuildRequires:	wayland-protocols >= 1.44
 BuildRequires:	xorg-lib-libX11-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXScrnSaver-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXdamage-devel
 BuildRequires:	xorg-lib-libXext-devel >= 1.0.0
+BuildRequires:	xorg-lib-libXfixes-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXpresent-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXrandr-devel >= 1.4.0
 BuildRequires:	xorg-lib-libXv-devel
@@ -88,7 +89,7 @@ Requires:	hicolor-icon-theme
 Requires:	lcms2 >= 2.6
 Requires:	libarchive >= 3.4.0
 Requires:	libass >= 0.12.2
-Requires:	libbluray >= 0.3.0
+Requires:	libbluray >= 0.5.0
 %{?with_caca:Requires:	libcaca >= 0.99-0.beta18.1}
 Requires:	libdisplay-info >= 0.1.1
 Requires:	libdrm >= 2.4.105
@@ -109,6 +110,7 @@ Requires:	wayland >= 1.21.0
 Requires:	xorg-lib-libX11 >= 1.0.0
 Requires:	xorg-lib-libXScrnSaver >= 1.0.0
 Requires:	xorg-lib-libXext >= 1.0.0
+Requires:	xorg-lib-libXfixes >= 1.0.0
 Requires:	xorg-lib-libXrandr >= 1.4.0
 Requires:	xorg-lib-libxkbcommon >= 0.3.0
 %{?with_zimg:Requires:	zimg >= 3.0.5}
@@ -210,7 +212,9 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 	-Drubberband=%{__enabled_disabled rubberband} \
 	-Dopenal=enabled \
 	-Dpulse=enabled \
-	-Dsdl2=enabled \
+	-Dsdl2-audio=enabled \
+	-Dsdl2-gamepad=enabled \
+	-Dsdl2-video=enabled \
 	-Dsixel=%{__enabled_disabled sixel} \
 	-Duchardet=enabled \
 	-Dvaapi=enabled \
@@ -253,9 +257,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.md RELEASE_NOTES etc/input.conf etc/mplayer-input.conf etc/mpv.conf etc/restore-old-bindings.conf
+%doc README.md RELEASE_NOTES etc/encoding-profiles.conf etc/input.conf etc/mplayer-input.conf etc/mpv.conf etc/restore-old-bindings.conf
 %dir %{_sysconfdir}/mpv
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mpv/encoding-profiles.conf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mpv/mpv.conf
 %attr(755,root,root) %{_bindir}/%{name}
 %attr(755,root,root) %{_bindir}/mpv_identify.sh
