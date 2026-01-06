@@ -7,12 +7,24 @@
 %bcond_without	sixel		# sixel video output
 %bcond_without	vapoursynth	# VapourSynth filter bridge
 %bcond_without	zimg		# libzimg support (high quality software scaler)
+%bcond_with	lua51		# Use Lua 5.1 for scripting
+%bcond_with	lua52		# Use Lua 5.2 for scripting
+%bcond_with	luajit		# Use LuaJIT for scripting
+
+# default to luajit on supported archs and to lua52 on others
+%if %{without lua51} && %{without lua52} && %{without luajit}
+%ifarch %{ix86} %{x8664} %{arm} aarch64 mips mips64 mipsel ppc
+%define		with_luajit	1
+%else
+%define		with_lua52	1
+%endif
+%endif
 
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
 Version:	0.41.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
@@ -51,7 +63,9 @@ BuildRequires:	libplacebo-devel >= 6.338.2
 BuildRequires:	libva-devel >= 1.4.0
 BuildRequires:	libva-glx-devel >= 1.4.0
 BuildRequires:	libvdpau-devel >= 0.2
-BuildRequires:	lua52-devel
+%{?with_lua51:BuildRequires:	lua51-devel}
+%{?with_lua52:BuildRequires:	lua52-devel}
+%{?with_luajit:BuildRequires:	luajit-devel}
 BuildRequires:	meson >= 1.3.0
 %{?with_js:BuildRequires:	mujs-devel >= 1.0.0}
 BuildRequires:	ninja
@@ -225,7 +239,7 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 	-Dx11=enabled \
 	-Dxv=enabled \
 	-Dzimg=%{__enabled_disabled zimg} \
-	-Dlua=lua5.2
+	-Dlua=%{?with_lua51:lua5.1}%{?with_lua52:lua5.2}%{?with_luajit:luajit}
 
 %meson_build
 
