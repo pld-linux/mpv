@@ -24,7 +24,7 @@ Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
 Version:	0.41.0
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
