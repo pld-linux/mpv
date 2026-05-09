@@ -95,39 +95,39 @@ BuildRequires:	xorg-proto-xproto-devel
 BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
-Requires:	OpenAL >= 1.13
+Requires:	OpenAL%{?_isa} >= 1.13
 Requires:	OpenGL
-Requires:	alsa-lib >= 1.0.18
+Requires:	alsa-lib%{?_isa} >= 1.0.18
 Requires:	hicolor-icon-theme
-%requires_eq_to	ffmpeg-libs ffmpeg-devel
-Requires:	lcms2 >= 2.6
-Requires:	libarchive >= 3.4.0
-Requires:	libass >= 0.12.2
-Requires:	libbluray >= 0.5.0
-%{?with_caca:Requires:	libcaca >= 0.99-0.beta18.1}
-Requires:	libdisplay-info >= 0.1.1
-Requires:	libdrm >= 2.4.105
+%requires_eq_to	ffmpeg-libs%{?_isa} ffmpeg-devel
+Requires:	lcms2%{?_isa} >= 2.6
+Requires:	libarchive%{?_isa} >= 3.4.0
+Requires:	libass%{?_isa} >= 0.12.2
+Requires:	libbluray%{?_isa} >= 0.5.0
+%{?with_caca:Requires:	libcaca%{?_isa} >= 0.99-0.beta18.1}
+Requires:	libdisplay-info%{?_isa} >= 0.1.1
+Requires:	libdrm%{?_isa} >= 2.4.105
 %if %{with dvdnav}
-Requires:	libdvdnav >= 4.2.0
+Requires:	libdvdnav%{?_isa} >= 4.2.0
 %endif
-Requires:	pipewire-libs >= 0.3.48
-%requires_ge_to	libplacebo libplacebo-devel
-%{?with_sixel:Requires:	libsixel >= 1.5}
-Requires:	libva >= 1.4.0
-Requires:	libva-glx >= 1.4.0
-Requires:	libvdpau >= 0.2
-%{?with_js:Requires:	mujs >= 1.0.0}
-Requires:	pulseaudio-libs >= 1.0
-%{?with_rubberband:Requires:	rubberband-libs >= 1.8.0}
-%{?with_vapoursynth:Requires:	vapoursynth >= 56}
-Requires:	wayland >= 1.21.0
-Requires:	xorg-lib-libX11 >= 1.0.0
-Requires:	xorg-lib-libXScrnSaver >= 1.0.0
-Requires:	xorg-lib-libXext >= 1.0.0
-Requires:	xorg-lib-libXfixes >= 1.0.0
-Requires:	xorg-lib-libXrandr >= 1.4.0
-Requires:	xorg-lib-libxkbcommon >= 0.3.0
-%{?with_zimg:Requires:	zimg >= 3.0.5}
+Requires:	pipewire-libs%{?_isa} >= 0.3.48
+%requires_ge_to	libplacebo%{?_isa} libplacebo-devel
+%{?with_sixel:Requires:	libsixel%{?_isa} >= 1.5}
+Requires:	libva%{?_isa} >= 1.4.0
+Requires:	libva-glx%{?_isa} >= 1.4.0
+Requires:	libvdpau%{?_isa} >= 0.2
+%{?with_js:Requires:	mujs%{?_isa} >= 1.0.0}
+Requires:	pulseaudio-libs%{?_isa} >= 1.0
+%{?with_rubberband:Requires:	rubberband-libs%{?_isa} >= 1.8.0}
+%{?with_vapoursynth:Requires:	vapoursynth%{?_isa} >= 56}
+Requires:	wayland%{?_isa} >= 1.21.0
+Requires:	xorg-lib-libX11%{?_isa} >= 1.0.0
+Requires:	xorg-lib-libXScrnSaver%{?_isa} >= 1.0.0
+Requires:	xorg-lib-libXext%{?_isa} >= 1.0.0
+Requires:	xorg-lib-libXfixes%{?_isa} >= 1.0.0
+Requires:	xorg-lib-libXrandr%{?_isa} >= 1.4.0
+Requires:	xorg-lib-libxkbcommon%{?_isa} >= 0.3.0
+%{?with_zimg:Requires:	zimg%{?_isa} >= 3.0.5}
 Suggests:	yt-dlp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -152,7 +152,7 @@ Biblioteka kliencka do sterowania odtwarzaczem mpv.
 Summary:	Development files for mpv client library
 Summary(pl.UTF-8):	Pliki programistyczne biblioteki klienckiej mpv
 Group:		Development/Libraries
-Requires:	%{name}-client-libs = %{version}-%{release}
+Requires:	%{name}-client-libs%{?_isa} = %{version}-%{release}
 
 %description client-devel
 Development files for mpv client library.
