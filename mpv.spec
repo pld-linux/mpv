@@ -10,6 +10,7 @@
 %bcond_with	lua51		# Use Lua 5.1 for scripting
 %bcond_with	lua52		# Use Lua 5.2 for scripting
 %bcond_with	luajit		# Use LuaJIT for scripting
+%bcond_with	v4l2_request	# V4L2 request API for stateless hw decoding
 
 # default to luajit on supported archs and to lua52 on others
 %if %{without lua51} && %{without lua52} && %{without luajit}
@@ -31,6 +32,7 @@ Group:		Applications/Multimedia
 Source0:	https://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	fa40a0fedeaf0a77127e238a39b9d4c4
 Source1:	%{name}.conf
+Patch0:		v4lrequest.patch
 URL:		http://mpv.io/
 BuildRequires:	EGL-devel
 BuildRequires:	Mesa-libgbm-devel >= 17.1.0
@@ -203,6 +205,7 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 
 %prep
 %setup -q
+%{?with_v4l2_request:%patch -P0 -p1}
 
 %build
 %meson \
