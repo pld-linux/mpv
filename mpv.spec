@@ -24,25 +24,24 @@
 Summary:	Movie player based on MPlayer and mplayer2
 Summary(pl.UTF-8):	Odtwarzacz filmów oparty na projektach MPlayer i mplayer2
 Name:		mpv
-Version:	0.41.0
-Release:	14
+Version:	0.42.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/Multimedia
 #Source0Download: http://github.com/mpv-player/mpv/releases
 Source0:	https://github.com/mpv-player/mpv/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	fa40a0fedeaf0a77127e238a39b9d4c4
+# Source0-md5:	7d97fa20fd67f8d71be640a6b1e1d434
 Source1:	%{name}.conf
 Patch0:		v4lrequest.patch
-Patch1:		yt-dlp-delay.patch
-Patch2:		vapoursynth-r74.patch
 URL:		http://mpv.io/
 BuildRequires:	EGL-devel
 BuildRequires:	Mesa-libgbm-devel >= 17.1.0
 BuildRequires:	OpenAL-devel >= 1.13
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL2-devel
-BuildRequires:	Vulkan-Loader-devel >= 1.3.238
+BuildRequires:	Vulkan-Loader-devel >= 1.4.309
 BuildRequires:	alsa-lib-devel >= 1.0.18
+BuildRequires:	curl-devel >= 7.88.0
 BuildRequires:	docutils
 BuildRequires:	ffmpeg-devel >= 6.1
 BuildRequires:	jack-audio-connection-kit-devel
@@ -52,17 +51,18 @@ BuildRequires:	libass-devel >= 0.12.2
 %ifnarch %arch_with_atomics64
 BuildRequires:	libatomic-devel
 %endif
-BuildRequires:	libbluray-devel >= 0.5.0
+BuildRequires:	libbluray-devel >= 1.0.2
 %{?with_caca:BuildRequires:	libcaca-devel >= 0.99-0.beta18.1}
 BuildRequires:	libcdio-devel >= 0.90
 BuildRequires:	libcdio-paranoia-devel
 BuildRequires:	libdisplay-info-devel >= 0.1.1
-BuildRequires:	libdrm-devel >= 2.4.105
+BuildRequires:	libdrm-devel >= 2.4.114
 %if %{with dvdnav}
-BuildRequires:	libdvdnav-devel >= 4.2.0
+BuildRequires:	libdvdnav-devel >= 6.1.0
 %endif
+BuildRequires:	libdvdread-devel >= 7.1.1
 BuildRequires:	libjpeg-devel
-BuildRequires:	libplacebo-devel >= 6.338.2
+BuildRequires:	libplacebo-devel >= 7.387.0
 %{?with_sixel:BuildRequires:	libsixel-devel >= 1.5}
 BuildRequires:	libva-devel >= 1.4.0
 BuildRequires:	libva-glx-devel >= 1.4.0
@@ -82,9 +82,9 @@ BuildRequires:	rpmbuild(macros) >= 2.042
 %{?with_rubberband:BuildRequires:	rubberband-devel >= 1.8.0}
 BuildRequires:	uchardet-devel
 %{?with_vapoursynth:BuildRequires:	vapoursynth-devel >= 56}
-BuildRequires:	wayland-devel >= 1.21.0
+BuildRequires:	wayland-devel >= 1.23.0
 BuildRequires:	wayland-egl-devel
-BuildRequires:	wayland-protocols >= 1.44
+BuildRequires:	wayland-protocols >= 1.48
 BuildRequires:	xorg-lib-libX11-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXScrnSaver-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXdamage-devel
@@ -102,18 +102,20 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires:	OpenAL%{?_isa} >= 1.13
 Requires:	OpenGL
 Requires:	alsa-lib%{?_isa} >= 1.0.18
+Requires:	curl-libs%{?_isa} >= 7.88.0
 Requires:	hicolor-icon-theme
 %requires_eq_to	ffmpeg-libs%{?_isa} ffmpeg-devel
 Requires:	lcms2%{?_isa} >= 2.6
 Requires:	libarchive%{?_isa} >= 3.4.0
 Requires:	libass%{?_isa} >= 0.12.2
-Requires:	libbluray%{?_isa} >= 0.5.0
+Requires:	libbluray%{?_isa} >= 1.0.2
 %{?with_caca:Requires:	libcaca%{?_isa} >= 0.99-0.beta18.1}
 Requires:	libdisplay-info%{?_isa} >= 0.1.1
-Requires:	libdrm%{?_isa} >= 2.4.105
+Requires:	libdrm%{?_isa} >= 2.4.114
 %if %{with dvdnav}
-Requires:	libdvdnav%{?_isa} >= 4.2.0
+Requires:	libdvdnav%{?_isa} >= 6.1.0
 %endif
+Requires:	libdvdread%{?_isa} >= 7.1.1
 Requires:	pipewire-libs%{?_isa} >= 0.3.48
 %requires_ge_to	libplacebo%{?_isa} libplacebo-devel
 %{?with_sixel:Requires:	libsixel%{?_isa} >= 1.5}
@@ -124,7 +126,7 @@ Requires:	libvdpau%{?_isa} >= 0.2
 Requires:	pulseaudio-libs%{?_isa} >= 1.0
 %{?with_rubberband:Requires:	rubberband-libs%{?_isa} >= 1.8.0}
 %{?with_vapoursynth:Requires:	vapoursynth%{?_isa} >= 56}
-Requires:	wayland%{?_isa} >= 1.21.0
+Requires:	wayland%{?_isa} >= 1.23.0
 Requires:	xorg-lib-libX11%{?_isa} >= 1.0.0
 Requires:	xorg-lib-libXScrnSaver%{?_isa} >= 1.0.0
 Requires:	xorg-lib-libXext%{?_isa} >= 1.0.0
@@ -208,8 +210,6 @@ Dopełnianie parametrów mpv dla powłoki ZSH.
 %prep
 %setup -q
 %{?with_v4l2_request:%patch -P0 -p1}
-%patch -P1 -p1
-%patch -P2 -p1
 
 %build
 %meson \
